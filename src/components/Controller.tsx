@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {
   Dimensions,
   Image,
+  ImageSourcePropType,
   ScrollView,
   TouchableOpacity,
   View,
@@ -13,8 +14,17 @@ const offImage = require('../assets/off_image.png');
 const iconLocation = require('../assets/icon-location.png');
 const dummyImage = require('../assets/dummy_image.png');
 
-const Controller = () => {
+const Controller = ({
+  onGuideImage,
+}: {
+  onGuideImage: (image: ImageSourcePropType) => void;
+}) => {
   const [isEdit, setIsEdit] = useState(false);
+
+  const handleSelectImage = (image: ImageSourcePropType) => {
+    onGuideImage(image);
+    setIsEdit(false);
+  };
 
   if (isEdit) {
     return (
@@ -31,13 +41,13 @@ const Controller = () => {
               <Image source={offImage} style={{width: 60, height: 60}} />
             </View>
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => handleSelectImage(dummyImage)}>
             <Image source={dummyImage} style={{width: 120, height: 120}} />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => handleSelectImage(dummyImage)}>
             <Image source={dummyImage} style={{width: 120, height: 120}} />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => handleSelectImage(dummyImage)}>
             <Image source={dummyImage} style={{width: 120, height: 120}} />
           </TouchableOpacity>
         </ScrollView>

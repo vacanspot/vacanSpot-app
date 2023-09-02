@@ -1,18 +1,35 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {styled} from 'styled-components/native';
 import {Camera, useCameraDevices} from 'react-native-vision-camera';
-import {Dimensions, Image, TouchableOpacity, View} from 'react-native';
+import {
+  Dimensions,
+  Image,
+  ImageSourcePropType,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import Controller from '../components/Controller';
+import {
+  getBottomSpace,
+  getStatusBarHeight,
+} from 'react-native-iphone-screen-helper';
 
 const appLogo = require('../assets/app_logo.png');
 
 const CameraScreen = () => {
+  const [guideImage, setGuideImage] = useState<ImageSourcePropType | null>(
+    null,
+  );
   //   const devices = useCameraDevices('wide-angle-camera');
 
   const devices = useCameraDevices();
   const device = devices.back;
 
   console.log('devices', devices);
+
+  const handleGuideImage = (image: ImageSourcePropType) => {
+    setGuideImage(image);
+  };
 
   useEffect(() => {
     const checkCameara = async () => {
@@ -46,6 +63,8 @@ const CameraScreen = () => {
       </Header>
       <View
         style={{
+          position: 'absolute',
+          top: Dimensions.get('screen').width / 2,
           width: Dimensions.get('screen').width,
           height: Dimensions.get('screen').width,
         }}>
@@ -58,7 +77,20 @@ const CameraScreen = () => {
           }}
         />
       </View>
-      <Controller />
+      {guideImage && (
+        <View
+          style={{
+            zIndex: 2,
+            position: 'absolute',
+            top: Dimensions.get('screen').width / 2,
+            width: Dimensions.get('screen').width,
+            height: Dimensions.get('screen').width,
+            opacity: 0.4,
+          }}>
+          <Image source={guideImage} style={{width: '100%', height: '100%'}} />
+        </View>
+      )}
+      <Controller onGuideImage={handleGuideImage} />
     </Wrapper>
   );
 };
