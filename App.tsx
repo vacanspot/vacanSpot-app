@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import {Text} from './src/components/atoms';
 import {
   getStatusBarHeight,
   getBottomSpace,
 } from 'react-native-iphone-screen-helper';
 import {styled} from 'styled-components/native';
-import {Platform} from 'react-native';
+import {Platform, StatusBar} from 'react-native';
 import LottieView from 'lottie-react-native';
 import SplashScreen from 'react-native-splash-screen';
 import Geolocation from '@react-native-community/geolocation';
+import CameraScreen from './src/screens/CameraScreen';
 
 const App = () => {
   const [appLoaded, setAppLoaded] = useState(false);
@@ -25,9 +25,12 @@ const App = () => {
   }, []);
 
   return appLoaded ? (
-    <RootView>
-      <Text>vacanSpot</Text>
-    </RootView>
+  <>
+   <StatusBar barStyle="light-content" />
+      <RootView>
+        <CameraScreen />
+      </RootView>
+      </>
   ) : (
     <SplashView>
       <LottieView
@@ -49,6 +52,8 @@ export default App;
 const RootView = styled.View`
   padding-top: ${Platform.OS === 'android' ? 0 : getStatusBarHeight()}px;
   padding-bottom: ${getBottomSpace()}px;
+  flex: 1;
+  background-color: black;
 `;
 
 const SplashView = styled.View`
