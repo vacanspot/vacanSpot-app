@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Text} from './src/components/atoms';
 import {
   getStatusBarHeight,
@@ -6,18 +6,56 @@ import {
 } from 'react-native-iphone-screen-helper';
 import {styled} from 'styled-components/native';
 import {Platform} from 'react-native';
+import LottieView from 'lottie-react-native';
+import SplashScreen from 'react-native-splash-screen';
+import Geolocation from '@react-native-community/geolocation';
 
-function App(): JSX.Element {
-  return (
+const App = () => {
+  const [appLoaded, setAppLoaded] = useState(false);
+
+  useEffect(() => {
+    Geolocation.getCurrentPosition(info => console.log(info));
+    SplashScreen.hide();
+  }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setAppLoaded(true);
+    }, 3000);
+  }, []);
+
+  return appLoaded ? (
     <RootView>
       <Text>vacanSpot</Text>
     </RootView>
+  ) : (
+    <SplashView>
+      <LottieView
+        source={require('./assets/splash.json')}
+        autoPlay
+        loop
+        resizeMode="cover"
+        style={{
+          width: 200,
+          height: 200,
+        }}
+      />
+    </SplashView>
   );
-}
+};
 
 export default App;
 
 const RootView = styled.View`
   padding-top: ${Platform.OS === 'android' ? 0 : getStatusBarHeight()}px;
   padding-bottom: ${getBottomSpace()}px;
+`;
+
+const SplashView = styled.View`
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  background-color: #fff7f1;
 `;
