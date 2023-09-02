@@ -113,7 +113,7 @@ const CameraScreen = () => {
               opacity: opacity / 100,
             }}>
             <Image
-              source={guideImage}
+              source={{uri: guideImage}}
               style={{width: '100%', height: '100%'}}
             />
           </View>
