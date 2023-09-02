@@ -28,7 +28,6 @@ const CameraScreen = () => {
   const [guideImage, setGuideImage] = useState<string | null>(null);
   const [cameraFace, setCameraFace] = useState<'back' | 'front'>('back');
 
-  console.log(opacity);
   const devices = useCameraDevices();
   const device = devices[cameraFace];
 

@@ -50,7 +50,6 @@ const Controller = ({
         qualityPrioritization: 'speed',
         enableShutterSound: false,
       });
-      console.log('Taking photo...', photo.path);
       if (photo) {
         const isSaved = await CameraRoll.save(photo.path);
         if (isSaved) {
@@ -90,7 +89,6 @@ const Controller = ({
 
   useEffect(() => {
     Geolocation.getCurrentPosition(info => {
-      console.log('info', info);
       mutate(
         {
           x: info.coords.longitude,
@@ -98,7 +96,6 @@ const Controller = ({
         },
         {
           onSuccess: res => {
-            console.log('res', res);
             if (res) {
               setAddress(res);
             }
@@ -112,7 +109,6 @@ const Controller = ({
         },
         {
           onSuccess: res => {
-            console.log('res', res);
             if (res) {
               setImageList(res);
             }
