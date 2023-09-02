@@ -26,7 +26,11 @@ const Controller = ({
   onGuideImage: (image: string | null) => void;
 }) => {
   const {mutate} = useSearchAddress();
-  const {mutate: mutateByAddress, isLoading} = useSearchImagesByAddress();
+  const {
+    mutate: mutateByAddress,
+    isLoading,
+    isIdle,
+  } = useSearchImagesByAddress();
 
   const [address, setAddress] = useState('');
   const [imageList, setImageList] = useState([]);
@@ -181,7 +185,7 @@ const Controller = ({
           )}
         </View>
         <ShutterButton onPress={() => takePhoto()} />
-        {isLoading ? (
+        {imageList.length > 0 ? (
           <TouchableOpacity
             onPress={() => {
               setIsEdit(true);
