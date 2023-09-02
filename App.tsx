@@ -25,12 +25,12 @@ const App = () => {
   }, []);
 
   return appLoaded ? (
-  <>
-   <StatusBar barStyle="light-content" />
+    <>
+      <StatusBar barStyle="light-content" />
       <RootView>
         <CameraScreen />
       </RootView>
-      </>
+    </>
   ) : (
     <SplashView>
       <LottieView

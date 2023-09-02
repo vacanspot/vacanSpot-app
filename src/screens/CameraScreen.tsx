@@ -1,18 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {styled} from 'styled-components/native';
 import {Camera, useCameraDevices} from 'react-native-vision-camera';
-import {
-  Dimensions,
-  Image,
-  ImageSourcePropType,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Dimensions, Image, ImageSourcePropType, View} from 'react-native';
 import Controller from '../components/Controller';
-import {
-  getBottomSpace,
-  getStatusBarHeight,
-} from 'react-native-iphone-screen-helper';
 
 const appLogo = require('../assets/app_logo.png');
 
@@ -24,8 +14,6 @@ const CameraScreen = () => {
 
   const devices = useCameraDevices();
   const device = devices.back;
-
-  console.log('devices', devices);
 
   const handleGuideImage = (image: ImageSourcePropType) => {
     setGuideImage(image);
@@ -76,6 +64,7 @@ const CameraScreen = () => {
             height: '100%',
           }}
         />
+        <Slider />
       </View>
       {guideImage && (
         <View
@@ -90,6 +79,7 @@ const CameraScreen = () => {
           <Image source={guideImage} style={{width: '100%', height: '100%'}} />
         </View>
       )}
+
       <Controller onGuideImage={handleGuideImage} />
     </Wrapper>
   );
@@ -111,36 +101,12 @@ const Header = styled.View`
   padding: 0 44px;
 `;
 
-const ShutterButton = () => {
-  return (
-    <TouchableOpacity
-      style={{
-        position: 'absolute',
-        left: Dimensions.get('screen').width / 2 - 36,
-      }}>
-      <View
-        style={{
-          position: 'relative',
-          width: 72,
-          height: 72,
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: 'white',
-          borderRadius: 36,
-        }}>
-        <View
-          style={{
-            width: 60,
-            height: 60,
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: 'white',
-            borderRadius: 30,
-            borderWidth: 4,
-            borderColor: 'black',
-          }}
-        />
-      </View>
-    </TouchableOpacity>
-  );
-};
+const Slider = styled.View`
+  z-index: 3;
+  position: absolute;
+  bottom: 20px;
+  height: 20px;
+  width: 20px;
+  background-color: red;
+  left: ${Dimensions.get('screen').width / 2};
+`;
