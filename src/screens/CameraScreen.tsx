@@ -2,19 +2,22 @@ import React, {useEffect, useRef, useState} from 'react';
 import {styled} from 'styled-components/native';
 import {Camera, useCameraDevices} from 'react-native-vision-camera';
 import {
+  ActivityIndicator,
   Dimensions,
   Image,
   StyleSheet,
-  TouchableOpacity,
   View,
 } from 'react-native';
 import Controller from '../components/Controller';
 import Reanimated from 'react-native-reanimated';
 
 import {Slider} from '@react-native-assets/slider';
+import {useSearchAddress} from '../hook/query/search';
+import Geolocation from '@react-native-community/geolocation';
+import {Text} from '../components/atoms';
 
 const appLogo = require('../assets/app_logo.png');
-const iconRefresh = require('../assets/icon-refresh.png');
+const iconLocation = require('../assets/icon-location.png');
 
 const ReanimatedCamera = Reanimated.createAnimatedComponent(Camera);
 Reanimated.addWhitelistedNativeProps({
@@ -22,11 +25,14 @@ Reanimated.addWhitelistedNativeProps({
 });
 
 const CameraScreen = () => {
+  const {mutate} = useSearchAddress();
+
   const camera = useRef<Camera>(null);
 
   const [opacity, setOpacity] = useState(30);
   const [guideImage, setGuideImage] = useState<string | null>(null);
   const [cameraFace, setCameraFace] = useState<'back' | 'front'>('back');
+  const [address, setAddress] = useState('');
 
   const devices = useCameraDevices();
   const device = devices[cameraFace];
@@ -46,6 +52,24 @@ const CameraScreen = () => {
     checkCameara();
   }, []);
 
+  useEffect(() => {
+    Geolocation.getCurrentPosition(info => {
+      mutate(
+        {
+          x: info.coords.longitude,
+          y: info.coords.latitude,
+        },
+        {
+          onSuccess: res => {
+            if (res) {
+              setAddress(res);
+            }
+          },
+        },
+      );
+    });
+  }, [address, mutate]);
+
   if (device == null) {
     return <Wrapper />;
   }
@@ -62,34 +86,33 @@ const CameraScreen = () => {
             source={appLogo}
             style={{
               position: 'absolute',
-              top: -40,
+              top: -60,
               left: -20,
               width: 100,
               height: 100,
             }}
           />
         </View>
-
-        <TouchableOpacity
-          onPress={() => {
-            setCameraFace(prev => (prev === 'back' ? 'front' : 'back'));
+        <View
+          style={{
+            flexDirection: 'row',
+            gap: 4,
+            justifyContent: 'center',
           }}>
-          <Image
-            source={iconRefresh}
-            style={{
-              width: 30,
-              height: 30,
-              marginTop: -30,
-            }}
-          />
-        </TouchableOpacity>
+          <Image source={iconLocation} style={{width: 16, height: 16}} />
+          {address ? (
+            <Text style={{color: '#352E1E', fontSize: 18}}>{address}</Text>
+          ) : (
+            <ActivityIndicator />
+          )}
+        </View>
       </Header>
       <View
         style={{
           position: 'absolute',
-          top: 120,
+          top: 100,
           width: Dimensions.get('screen').width,
-          height: Dimensions.get('screen').width + 60,
+          height: Dimensions.get('screen').width + 80,
         }}>
         <ReanimatedCamera
           ref={camera}
@@ -107,9 +130,9 @@ const CameraScreen = () => {
             style={{
               zIndex: 2,
               position: 'absolute',
-              top: 120,
+              top: 100,
               width: Dimensions.get('screen').width,
-              height: Dimensions.get('screen').width + 60,
+              height: Dimensions.get('screen').width + 80,
               opacity: opacity / 100,
             }}>
             <Image
@@ -141,7 +164,13 @@ const CameraScreen = () => {
           </SliderView>
         </>
       )}
-      <Controller onGuideImage={handleGuideImage} camera={camera} />
+      <Controller
+        onGuideImage={handleGuideImage}
+        camera={camera}
+        onCameraFace={() => {
+          setCameraFace(prev => (prev === 'back' ? 'front' : 'back'));
+        }}
+      />
     </Wrapper>
   );
 };

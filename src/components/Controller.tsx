@@ -9,30 +9,29 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {styled} from 'styled-components/native';
-import {Text} from './atoms';
 import {Camera} from 'react-native-vision-camera';
 import {CameraRoll} from '@react-native-camera-roll/camera-roll';
 import Geolocation from '@react-native-community/geolocation';
-import {useSearchAddress, useSearchImagesByAddress} from '../hook/query/search';
+import {useSearchImagesByAddress} from '../hook/query/search';
 
 const offImage = require('../assets/off_image.png');
-const iconLocation = require('../assets/icon-location.png');
+const iconRefresh = require('../assets/icon-refresh.png');
 
 const Controller = ({
   camera,
   onGuideImage,
+  onCameraFace,
 }: {
   camera: React.RefObject<Camera>;
   onGuideImage: (image: string | null) => void;
+  onCameraFace: () => void;
 }) => {
-  const {mutate} = useSearchAddress();
   const {
     mutate: mutateByAddress,
     isLoading,
     isIdle,
   } = useSearchImagesByAddress();
 
-  const [address, setAddress] = useState('');
   const [imageList, setImageList] = useState([]);
   const [click, setClick] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
@@ -93,19 +92,6 @@ const Controller = ({
 
   useEffect(() => {
     Geolocation.getCurrentPosition(info => {
-      mutate(
-        {
-          x: info.coords.longitude,
-          y: info.coords.latitude,
-        },
-        {
-          onSuccess: res => {
-            if (res) {
-              setAddress(res);
-            }
-          },
-        },
-      );
       mutateByAddress(
         {
           x: info.coords.longitude,
@@ -120,7 +106,7 @@ const Controller = ({
         },
       );
     });
-  }, [address, mutate, mutateByAddress]);
+  }, [mutateByAddress]);
 
   if (isEdit) {
     return (
@@ -167,47 +153,53 @@ const Controller = ({
           height: Dimensions.get('screen').width + 60,
         }}
       />
-      <Wrapper>
-        <View
-          style={{
-            flexDirection: 'row',
-            gap: 4,
-            justifyContent: 'center',
-            paddingLeft: 20,
-          }}>
-          <Image source={iconLocation} style={{width: 16, height: 16}} />
-          {address ? (
-            <Text style={{color: '#352E1E', fontSize: 18, lineHeight: 16}}>
-              {address}
-            </Text>
-          ) : (
-            <ActivityIndicator />
-          )}
-        </View>
-        <ShutterButton onPress={() => takePhoto()} />
-        {imageList.length > 0 ? (
-          <TouchableOpacity
-            onPress={() => {
-              setIsEdit(true);
-            }}>
-            <Image
-              source={{uri: imageList[0]}}
-              style={{width: 100, height: 100}}
-            />
-          </TouchableOpacity>
-        ) : (
+      <View
+        style={{
+          flexDirection: 'column',
+        }}>
+        <Wrapper>
           <View
             style={{
-              width: 100,
-              height: 100,
-              backgroundColor: '#EFF0EB',
-              alignItems: 'center',
+              flexDirection: 'row',
+              gap: 4,
               justifyContent: 'center',
+              paddingLeft: 20,
             }}>
-            <ActivityIndicator />
+            <TouchableOpacity onPress={onCameraFace}>
+              <Image
+                source={iconRefresh}
+                style={{
+                  width: 40,
+                  height: 40,
+                }}
+              />
+            </TouchableOpacity>
           </View>
-        )}
-      </Wrapper>
+          <ShutterButton onPress={() => takePhoto()} />
+          {imageList.length > 0 ? (
+            <TouchableOpacity
+              onPress={() => {
+                setIsEdit(true);
+              }}>
+              <Image
+                source={{uri: imageList[0]}}
+                style={{width: 100, height: 100}}
+              />
+            </TouchableOpacity>
+          ) : (
+            <View
+              style={{
+                width: 100,
+                height: 100,
+                backgroundColor: '#EFF0EB',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <ActivityIndicator />
+            </View>
+          )}
+        </Wrapper>
+      </View>
     </>
   );
 };
