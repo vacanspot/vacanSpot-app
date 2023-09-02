@@ -26,7 +26,7 @@ const App = () => {
 
   return appLoaded ? (
     <>
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="dark-content" />
       <RootView>
         <CameraScreen />
       </RootView>
@@ -53,7 +53,7 @@ const RootView = styled.View`
   padding-top: ${Platform.OS === 'android' ? 0 : getStatusBarHeight()}px;
   padding-bottom: ${getBottomSpace()}px;
   flex: 1;
-  background-color: black;
+  background-color: #fff7f1;
 `;
 
 const SplashView = styled.View`

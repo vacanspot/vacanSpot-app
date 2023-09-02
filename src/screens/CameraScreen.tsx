@@ -1,12 +1,26 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {styled} from 'styled-components/native';
 import {Camera, useCameraDevices} from 'react-native-vision-camera';
-import {Dimensions, Image, ImageSourcePropType, View} from 'react-native';
+import {
+  Dimensions,
+  Image,
+  ImageSourcePropType,
+  StyleSheet,
+  View,
+} from 'react-native';
 import Controller from '../components/Controller';
+import Reanimated from 'react-native-reanimated';
+
+const ReanimatedCamera = Reanimated.createAnimatedComponent(Camera);
+Reanimated.addWhitelistedNativeProps({
+  zoom: true,
+});
 
 const appLogo = require('../assets/app_logo.png');
 
 const CameraScreen = () => {
+  const camera = useRef<Camera>(null);
+
   const [guideImage, setGuideImage] = useState<ImageSourcePropType | null>(
     null,
   );
@@ -15,7 +29,7 @@ const CameraScreen = () => {
   const devices = useCameraDevices();
   const device = devices.back;
 
-  const handleGuideImage = (image: ImageSourcePropType) => {
+  const handleGuideImage = (image: ImageSourcePropType | null) => {
     setGuideImage(image);
   };
 
@@ -52,17 +66,18 @@ const CameraScreen = () => {
       <View
         style={{
           position: 'absolute',
-          top: Dimensions.get('screen').width / 2,
+          top: 120,
           width: Dimensions.get('screen').width,
-          height: Dimensions.get('screen').width,
+          height: Dimensions.get('screen').width + 60,
         }}>
-        <Camera
+        <ReanimatedCamera
+          ref={camera}
           device={device}
           isActive={true}
-          style={{
-            width: '100%',
-            height: '100%',
-          }}
+          style={StyleSheet.absoluteFill}
+          enableZoomGesture={false}
+          orientation="portrait"
+          photo={true}
         />
         <Slider />
       </View>
@@ -71,16 +86,15 @@ const CameraScreen = () => {
           style={{
             zIndex: 2,
             position: 'absolute',
-            top: Dimensions.get('screen').width / 2,
+            top: 120,
             width: Dimensions.get('screen').width,
-            height: Dimensions.get('screen').width,
+            height: Dimensions.get('screen').width + 60,
             opacity: 0.4,
           }}>
           <Image source={guideImage} style={{width: '100%', height: '100%'}} />
         </View>
       )}
-
-      <Controller onGuideImage={handleGuideImage} />
+      <Controller onGuideImage={handleGuideImage} camera={camera} />
     </Wrapper>
   );
 };

@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@react-native-assets/slider": "^7.0.3",
+    "@react-native-camera-roll/camera-roll": "^5.7.2",
+    "@react-native-community/cameraroll": "^4.1.2",
     "@react-native-community/geolocation": "^3.0.6",
     "axios": "^1.5.0",
     "lottie-ios": "^3.1.8",
@@ -18,6 +20,7 @@
     "react": "18.2.0",
     "react-native": "0.72.4",
     "react-native-iphone-screen-helper": "^2.0.3",
+    "react-native-reanimated": "^3.4.2",
     "react-native-splash-screen": "^3.3.0",
     "react-native-vision-camera": "^3.0.0",
     "react-query": "^3.39.3",
