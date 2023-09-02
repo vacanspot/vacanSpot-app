@@ -4,8 +4,8 @@ import {Camera, useCameraDevices} from 'react-native-vision-camera';
 import {
   Dimensions,
   Image,
-  ImageSourcePropType,
   StyleSheet,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import Controller from '../components/Controller';
@@ -14,6 +14,7 @@ import Reanimated from 'react-native-reanimated';
 import {Slider} from '@react-native-assets/slider';
 
 const appLogo = require('../assets/app_logo.png');
+const iconRefresh = require('../assets/icon-refresh.png');
 
 const ReanimatedCamera = Reanimated.createAnimatedComponent(Camera);
 Reanimated.addWhitelistedNativeProps({
@@ -24,13 +25,12 @@ const CameraScreen = () => {
   const camera = useRef<Camera>(null);
 
   const [opacity, setOpacity] = useState(30);
-  const [guideImage, setGuideImage] = useState<ImageSourcePropType | null>(
-    null,
-  );
+  const [guideImage, setGuideImage] = useState<string | null>(null);
+  const [cameraFace, setCameraFace] = useState<'back' | 'front'>('back');
 
   console.log(opacity);
   const devices = useCameraDevices();
-  const device = devices.back;
+  const device = devices[cameraFace];
 
   const handleGuideImage = (image: string | null) => {
     setGuideImage(image);
@@ -53,18 +53,37 @@ const CameraScreen = () => {
   return (
     <Wrapper>
       <Header>
-        <View style={{position: 'relative', width: 50, height: 50}}>
+        <View
+          style={{
+            position: 'relative',
+            width: 50,
+            height: 50,
+          }}>
           <Image
             source={appLogo}
             style={{
               position: 'absolute',
               top: -40,
-              left: -40,
+              left: -20,
               width: 100,
               height: 100,
             }}
           />
         </View>
+
+        <TouchableOpacity
+          onPress={() => {
+            setCameraFace(prev => (prev === 'back' ? 'front' : 'back'));
+          }}>
+          <Image
+            source={iconRefresh}
+            style={{
+              width: 30,
+              height: 30,
+              marginTop: -30,
+            }}
+          />
+        </TouchableOpacity>
       </Header>
       <View
         style={{
@@ -141,7 +160,7 @@ const Header = styled.View`
   align-items: center;
   gap: 50px;
   height: 160px;
-  padding: 0 44px;
+  padding: 0 24px;
 `;
 
 const SliderView = styled.View`
