@@ -84,44 +84,46 @@ const CameraScreen = () => {
         />
       </View>
       {guideImage && (
-        <View
-          style={{
-            zIndex: 2,
-            position: 'absolute',
-            top: 120,
-            width: Dimensions.get('screen').width,
-            height: Dimensions.get('screen').width + 60,
-            opacity: opacity / 100,
-          }}>
-          <Image
-            source={{uri: guideImage}}
-            style={{width: '100%', height: '100%'}}
-          />
-        </View>
+        <>
+          <View
+            style={{
+              zIndex: 2,
+              position: 'absolute',
+              top: 120,
+              width: Dimensions.get('screen').width,
+              height: Dimensions.get('screen').width + 60,
+              opacity: opacity / 100,
+            }}>
+            <Image
+              source={guideImage}
+              style={{width: '100%', height: '100%'}}
+            />
+          </View>
+          <SliderView>
+            <Slider
+              style={{
+                width: 200,
+                height: 40,
+              }}
+              minimumValue={0} // Minimum value
+              maximumValue={100} // Maximum value
+              thumbTintColor="#FA8F21" // The color of the slider's thumb
+              value={opacity} // set the current slider's value
+              onValueChange={value => setOpacity(value)}
+              step={0} // The step for the slider (0 means that the slider will handle any decimal value within the range [min, max])
+              minimumTrackTintColor="grey" // The track color before the current value
+              maximumTrackTintColor="grey" // The track color after the current value
+              vertical={false} // If true, the slider will be drawn vertically
+              inverted={false} // If true, min value will be on the right, and max on the left
+              enabled={true} // If false, the slider won't respond to touches anymore
+              trackHeight={4} // The track's height in pixel
+              thumbSize={15} // The thumb's size in pixel
+              slideOnTap={true} // If true, touching the slider will update it's value. No need to slide the thumb.
+            />
+          </SliderView>
+        </>
       )}
       <Controller onGuideImage={handleGuideImage} camera={camera} />
-      <SliderView>
-        <Slider
-          style={{
-            width: 200,
-            height: 40,
-          }}
-          minimumValue={0} // Minimum value
-          maximumValue={100} // Maximum value
-          thumbTintColor="#FA8F21" // The color of the slider's thumb
-          value={opacity} // set the current slider's value
-          onValueChange={value => setOpacity(value)}
-          step={0} // The step for the slider (0 means that the slider will handle any decimal value within the range [min, max])
-          minimumTrackTintColor="grey" // The track color before the current value
-          maximumTrackTintColor="grey" // The track color after the current value
-          vertical={false} // If true, the slider will be drawn vertically
-          inverted={false} // If true, min value will be on the right, and max on the left
-          enabled={true} // If false, the slider won't respond to touches anymore
-          trackHeight={4} // The track's height in pixel
-          thumbSize={15} // The thumb's size in pixel
-          slideOnTap={true} // If true, touching the slider will update it's value. No need to slide the thumb.
-        />
-      </SliderView>
     </Wrapper>
   );
 };

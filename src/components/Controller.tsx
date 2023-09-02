@@ -1,15 +1,14 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {
-  Alert,
   Dimensions,
   Image,
-  ImageSourcePropType,
   ScrollView,
   TouchableOpacity,
   View,
   Animated,
+  ActivityIndicator,
 } from 'react-native';
-import {styled} from 'styled-components';
+import {styled} from 'styled-components/native';
 import {Text} from './atoms';
 import {Camera} from 'react-native-vision-camera';
 import {CameraRoll} from '@react-native-camera-roll/camera-roll';
@@ -27,7 +26,7 @@ const Controller = ({
   onGuideImage: (image: string | null) => void;
 }) => {
   const {mutate} = useSearchAddress();
-  const {mutate: mutateByAddress} = useSearchImagesByAddress();
+  const {mutate: mutateByAddress, isLoading} = useSearchImagesByAddress();
 
   const [address, setAddress] = useState('');
   const [imageList, setImageList] = useState([]);
@@ -169,23 +168,44 @@ const Controller = ({
         }}
       />
       <Wrapper>
-        <View style={{flexDirection: 'row', gap: 4, alignItems: 'center'}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            gap: 4,
+            justifyContent: 'center',
+            paddingLeft: 20,
+          }}>
           <Image source={iconLocation} style={{width: 16, height: 16}} />
-          <Text style={{color: '#352E1E', fontSize: 18, lineHeight: 16}}>
-            {address}
-          </Text>
+          {address ? (
+            <Text style={{color: '#352E1E', fontSize: 18, lineHeight: 16}}>
+              {address}
+            </Text>
+          ) : (
+            <ActivityIndicator />
+          )}
         </View>
         <ShutterButton onPress={() => takePhoto()} />
-        {imageList?.length > 0 && (
+        {isLoading ? (
           <TouchableOpacity
             onPress={() => {
               setIsEdit(true);
             }}>
             <Image
               source={{uri: imageList[0]}}
-              style={{width: 52, height: 52}}
+              style={{width: 100, height: 100}}
             />
           </TouchableOpacity>
+        ) : (
+          <View
+            style={{
+              width: 100,
+              height: 100,
+              backgroundColor: '#EFF0EB',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <ActivityIndicator />
+          </View>
         )}
       </Wrapper>
     </>
@@ -200,7 +220,7 @@ const Wrapper = styled.View`
   align-items: center;
   gap: 50px;
   height: 160px;
-  padding: 0 44px;
+  padding: 0 20px;
 `;
 
 const ShutterButton = ({onPress}: {onPress: () => void}) => {
