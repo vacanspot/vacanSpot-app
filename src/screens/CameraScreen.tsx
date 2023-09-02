@@ -32,7 +32,7 @@ const CameraScreen = () => {
   const devices = useCameraDevices();
   const device = devices.back;
 
-  const handleGuideImage = (image: ImageSourcePropType | null) => {
+  const handleGuideImage = (image: string | null) => {
     setGuideImage(image);
   };
 
@@ -93,7 +93,10 @@ const CameraScreen = () => {
             height: Dimensions.get('screen').width + 60,
             opacity: opacity / 100,
           }}>
-          <Image source={guideImage} style={{width: '100%', height: '100%'}} />
+          <Image
+            source={{uri: guideImage}}
+            style={{width: '100%', height: '100%'}}
+          />
         </View>
       )}
       <Controller onGuideImage={handleGuideImage} camera={camera} />

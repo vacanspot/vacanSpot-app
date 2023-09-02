@@ -13,23 +13,29 @@ import {styled} from 'styled-components';
 import {Text} from './atoms';
 import {Camera} from 'react-native-vision-camera';
 import {CameraRoll} from '@react-native-camera-roll/camera-roll';
+import Geolocation from '@react-native-community/geolocation';
+import {useSearchAddress, useSearchImagesByAddress} from '../hook/query/search';
 
 const offImage = require('../assets/off_image.png');
 const iconLocation = require('../assets/icon-location.png');
-const dummyImage = require('../assets/dummy_image.png');
 
 const Controller = ({
   camera,
   onGuideImage,
 }: {
   camera: React.RefObject<Camera>;
-  onGuideImage: (image: ImageSourcePropType | null) => void;
+  onGuideImage: (image: string | null) => void;
 }) => {
+  const {mutate} = useSearchAddress();
+  const {mutate: mutateByAddress} = useSearchImagesByAddress();
+
+  const [address, setAddress] = useState('');
+  const [imageList, setImageList] = useState([]);
   const [click, setClick] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const colorAnim = new Animated.Value(0); // 초기 배경색 애니메이션 값
 
-  const handleSelectImage = (image: ImageSourcePropType) => {
+  const handleSelectImage = (image: string) => {
     onGuideImage(image);
     setIsEdit(false);
   };
@@ -83,6 +89,40 @@ const Controller = ({
     outputRange: ['rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 1)'], // 투명에서 검은색으로
   });
 
+  useEffect(() => {
+    Geolocation.getCurrentPosition(info => {
+      console.log('info', info);
+      mutate(
+        {
+          x: info.coords.longitude,
+          y: info.coords.latitude,
+        },
+        {
+          onSuccess: res => {
+            console.log('res', res);
+            if (res) {
+              setAddress(res);
+            }
+          },
+        },
+      );
+      mutateByAddress(
+        {
+          x: info.coords.longitude,
+          y: info.coords.latitude,
+        },
+        {
+          onSuccess: res => {
+            console.log('res', res);
+            if (res) {
+              setImageList(res);
+            }
+          },
+        },
+      );
+    });
+  }, [address, mutate, mutateByAddress]);
+
   if (isEdit) {
     return (
       <Wrapper style={{paddingRight: 0, paddingLeft: 20}}>
@@ -105,15 +145,13 @@ const Controller = ({
               <Image source={offImage} style={{width: 60, height: 60}} />
             </View>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => handleSelectImage(dummyImage)}>
-            <Image source={dummyImage} style={{width: 120, height: 120}} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => handleSelectImage(dummyImage)}>
-            <Image source={dummyImage} style={{width: 120, height: 120}} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => handleSelectImage(dummyImage)}>
-            <Image source={dummyImage} style={{width: 120, height: 120}} />
-          </TouchableOpacity>
+          {imageList?.map(image => (
+            <TouchableOpacity
+              key={image}
+              onPress={() => handleSelectImage(image)}>
+              <Image source={{uri: image}} style={{width: 120, height: 120}} />
+            </TouchableOpacity>
+          ))}
         </ScrollView>
       </Wrapper>
     );
@@ -134,16 +172,21 @@ const Controller = ({
         <View style={{flexDirection: 'row', gap: 4, alignItems: 'center'}}>
           <Image source={iconLocation} style={{width: 16, height: 16}} />
           <Text style={{color: '#352E1E', fontSize: 18, lineHeight: 16}}>
-            광안리
+            {address}
           </Text>
         </View>
         <ShutterButton onPress={() => takePhoto()} />
-        <TouchableOpacity
-          onPress={() => {
-            setIsEdit(true);
-          }}>
-          <Image source={dummyImage} style={{width: 52, height: 52}} />
-        </TouchableOpacity>
+        {imageList?.length > 0 && (
+          <TouchableOpacity
+            onPress={() => {
+              setIsEdit(true);
+            }}>
+            <Image
+              source={{uri: imageList[0]}}
+              style={{width: 52, height: 52}}
+            />
+          </TouchableOpacity>
+        )}
       </Wrapper>
     </>
   );

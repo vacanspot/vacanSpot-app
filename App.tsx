@@ -9,12 +9,29 @@ import LottieView from 'lottie-react-native';
 import SplashScreen from 'react-native-splash-screen';
 import Geolocation from '@react-native-community/geolocation';
 import CameraScreen from './src/screens/CameraScreen';
+import {useSearchAddress} from './src/hook/query/search';
+import {QueryClient, QueryClientProvider} from 'react-query';
 
 const App = () => {
   const [appLoaded, setAppLoaded] = useState(false);
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            refetchOnMount: false, // 컴포넌트가 마운트될 때, refetch
+            refetchOnReconnect: true, // 네트워크가 재연결될 때, refetch
+            refetchOnWindowFocus: false, // 브라우저 탭이 활성화될 때, refetch
+            retry: 0, // query 호출 실패 시, 재호출 시도 횟수
+            useErrorBoundary: false,
+            cacheTime: 1000 * 60 * 30, // TODO: 임시
+            staleTime: 1000 * 60 * 30, // TODO: 임시
+          },
+        },
+      }),
+  );
 
   useEffect(() => {
-    Geolocation.getCurrentPosition(info => console.log(info));
     SplashScreen.hide();
   }, []);
 
@@ -24,26 +41,28 @@ const App = () => {
     }, 3000);
   }, []);
 
-  return appLoaded ? (
-    <>
+  return (
+    <QueryClientProvider client={queryClient}>
       <StatusBar barStyle="dark-content" />
-      <RootView>
-        <CameraScreen />
-      </RootView>
-    </>
-  ) : (
-    <SplashView>
-      <LottieView
-        source={require('./assets/splash.json')}
-        autoPlay
-        loop
-        resizeMode="cover"
-        style={{
-          width: 200,
-          height: 200,
-        }}
-      />
-    </SplashView>
+      {appLoaded ? (
+        <RootView>
+          <CameraScreen />
+        </RootView>
+      ) : (
+        <SplashView>
+          <LottieView
+            source={require('./assets/splash.json')}
+            autoPlay
+            loop
+            resizeMode="cover"
+            style={{
+              width: 200,
+              height: 200,
+            }}
+          />
+        </SplashView>
+      )}
+    </QueryClientProvider>
   );
 };
 

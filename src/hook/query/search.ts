@@ -1,14 +1,14 @@
 import api from '../../util/api';
-import {useQuery} from 'react-query';
+import {useMutation, useQuery} from 'react-query';
 
 interface SearchParam {
   x: string;
   y: string;
 }
 
-export const useSearchAddress = (params: SearchParam) => {
-  return useQuery(['SearchAddress', params.x, params.y], async () => {
-    const response = await api.get<{address: string}>('/address', {
+export const useSearchAddress = () => {
+  return useMutation(async (params: {x: number | null; y: number}) => {
+    const response = await api.get<string>('/address', {
       params,
     });
 
@@ -16,9 +16,9 @@ export const useSearchAddress = (params: SearchParam) => {
   });
 };
 
-export const useSearchImagesByAddress = (params: SearchParam) => {
-  return useQuery(['SearchImagesByAddress', params.x, params.y], async () => {
-    const response = await api.get<{images: string[]}>('/recommend/images', {
+export const useSearchImagesByAddress = () => {
+  return useMutation(async (params: {x: number | null; y: number}) => {
+    const response = await api.get<string[]>('/recommend/images', {
       params,
     });
 
