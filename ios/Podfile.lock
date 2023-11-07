@@ -379,9 +379,9 @@ PODS:
   - React-jsinspector (0.72.4)
   - React-logger (0.72.4):
     - glog
-  - react-native-cameraroll (5.8.0):
+  - react-native-cameraroll (5.10.0):
     - React-Core
-  - react-native-geolocation (3.0.6):
+  - react-native-geolocation (3.1.0):
     - React-Core
   - react-native-splash-screen (3.3.0):
     - React-Core
@@ -495,7 +495,7 @@ PODS:
     - React-jsi (= 0.72.4)
     - React-logger (= 0.72.4)
     - React-perflogger (= 0.72.4)
-  - RNReanimated (3.4.2):
+  - RNReanimated (3.5.4):
     - DoubleConversion
     - FBLazyVector
     - glog
@@ -525,7 +525,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - Yoga
   - SocketRocket (0.6.1)
-  - VisionCamera (3.0.0):
+  - VisionCamera (3.6.4):
     - React
     - React-callinvoker
     - React-Core
@@ -753,8 +753,8 @@ SPEC CHECKSUMS:
   React-jsiexecutor: c7f826e40fa9cab5d37cab6130b1af237332b594
   React-jsinspector: aaed4cf551c4a1c98092436518c2d267b13a673f
   React-logger: da1ebe05ae06eb6db4b162202faeafac4b435e77
-  react-native-cameraroll: 8cc80e0922a6a432938a26f3b50714adcb2adb5f
-  react-native-geolocation: 0f7fe8a4c2de477e278b0365cce27d089a8c5903
+  react-native-cameraroll: f2e1db1191cff2035c9729317b119d46e717ae9c
+  react-native-geolocation: 62eb996038cd185055d3664312cae9621badf20f
   react-native-splash-screen: 4312f786b13a81b5169ef346d76d33bc0c6dc457
   React-NativeModulesApple: edb5ace14f73f4969df6e7b1f3e41bef0012740f
   React-perflogger: 496a1a3dc6737f964107cb3ddae7f9e265ddda58
@@ -773,12 +773,12 @@ SPEC CHECKSUMS:
   React-runtimescheduler: 4941cc1b3cf08b792fbf666342c9fc95f1969035
   React-utils: b79f2411931f9d3ea5781404dcbb2fa8a837e13a
   ReactCommon: 4b2bdcb50a3543e1c2b2849ad44533686610826d
-  RNReanimated: 726395a2fa2f04cea340274ba57a4e659bc0d9c1
+  RNReanimated: ab2e96c6d5591c3dfbb38a464f54c8d17fb34a87
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
-  VisionCamera: c4f239ef0ce8fb13937966b814f57925560f5596
+  VisionCamera: 6f59877311ffbd9da77000bd88fb48f154a60cad
   Yoga: 3efc43e0d48686ce2e8c60f99d4e6bd349aff981
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
 PODFILE CHECKSUM: 279e2c67442c9229008a6686cd4567244ebd3502
 
-COCOAPODS: 1.12.0
+COCOAPODS: 1.11.3
