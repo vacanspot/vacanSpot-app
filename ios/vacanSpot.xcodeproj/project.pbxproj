@@ -496,7 +496,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = BZRFDSH2C2;
+				DEVELOPMENT_TEAM = 6466UN3DVM;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = vacanSpot/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "바캉스팟";
@@ -510,7 +510,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vacanSpot;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vacanspot.m;
 				PRODUCT_NAME = vacanSpot;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -528,7 +528,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = BZRFDSH2C2;
+				DEVELOPMENT_TEAM = 6466UN3DVM;
 				INFOPLIST_FILE = vacanSpot/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "바캉스팟";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -541,7 +541,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vacanSpot;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vacanspot.m;
 				PRODUCT_NAME = vacanSpot;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
