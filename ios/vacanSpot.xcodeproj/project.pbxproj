@@ -457,7 +457,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vacanSpot;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vacanspot.m;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/vacanSpot.app/vacanSpot";
 			};
@@ -481,7 +481,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vacanSpot;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vacanspot.m;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/vacanSpot.app/vacanSpot";
 			};
