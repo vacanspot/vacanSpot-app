@@ -8,13 +8,12 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import Controller from '../components/Controller';
+import Controller from './Controller';
 import Reanimated from 'react-native-reanimated';
 
 import {Slider} from '@react-native-assets/slider';
 import {useSearchAddress} from '../hook/query/search';
 import Geolocation from '@react-native-community/geolocation';
-import {Text} from '../components/atoms';
 
 const appLogo = require('../assets/app_logo.png');
 const iconLocation = require('../assets/icon-location.png');
@@ -24,7 +23,7 @@ Reanimated.addWhitelistedNativeProps({
   zoom: true,
 });
 
-const CameraScreen = () => {
+const CameraView = () => {
   const {mutate} = useSearchAddress();
 
   const camera = useRef<Camera>(null);
@@ -101,8 +100,9 @@ const CameraScreen = () => {
           }}>
           <Image source={iconLocation} style={{width: 16, height: 16}} />
           {address ? (
-            <Text style={{color: '#352E1E', fontSize: 18}}>{address}</Text>
+            <></>
           ) : (
+            // <Text style={{color: '#352E1E', fontSize: 18}}>{address}</Text>
             <ActivityIndicator />
           )}
         </View>
@@ -175,7 +175,7 @@ const CameraScreen = () => {
   );
 };
 
-export default CameraScreen;
+export default CameraView;
 
 const Wrapper = styled.View`
   flex: 1;
