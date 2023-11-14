@@ -1,6 +1,7 @@
 import LottieView from 'lottie-react-native';
 import React, {useState} from 'react';
-import {View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+import MainView from './src/components/MainView';
 
 const App = () => {
   const [loaded, setLoaded] = useState(false);
@@ -8,22 +9,13 @@ const App = () => {
   return (
     <>
       {loaded ? (
-        <View
-          style={{width: '100%', height: '100%', backgroundColor: '#547392'}}
-        />
+        <MainView />
       ) : (
-        <View
-          style={{width: '100%', height: '100%', backgroundColor: '#fff1d9'}}>
+        <View style={styles.SplashContainer}>
           <LottieView
-            style={{
-              flex: 1,
-              justifyContent: 'center',
-              width: 200,
-              height: 400,
-            }}
+            style={styles.SplashIcon}
             source={require('./assets/splash.json')}
             autoPlay
-            loop={false}
             onAnimationFinish={() => setLoaded(true)}
           />
         </View>
@@ -33,3 +25,17 @@ const App = () => {
 };
 
 export default App;
+
+const styles = StyleSheet.create({
+  SplashContainer: {
+    width: '100%',
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#fff1d9',
+  },
+  SplashIcon: {
+    width: 200,
+    height: 600,
+  },
+});
