@@ -1,3 +1,4 @@
 import Splash from './Splash';
+import MainBottom from './MainBottom';
 
-export {Splash};
+export {Splash, MainBottom};

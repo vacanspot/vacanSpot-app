@@ -1,11 +1,12 @@
-import {COLORS} from '@/constants/colors';
 import React from 'react';
+import {COLORS} from '@/constants/colors';
 import {Dimensions, Image, StyleSheet, View} from 'react-native';
 import {
   getBottomSpace,
   getStatusBarHeight,
 } from 'react-native-iphone-screen-helper';
 import Assets from 'assets';
+import {MainBottom} from '@/components';
 
 const Main = () => {
   return (
@@ -14,7 +15,9 @@ const Main = () => {
         <Image source={Assets.logo} width={32} height={32} />
       </View>
       <View style={styles.CameraArea} />
-      <View style={styles.Bottom} />
+      <View style={styles.Bottom}>
+        <MainBottom />
+      </View>
     </View>
   );
 };
