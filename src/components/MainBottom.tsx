@@ -1,22 +1,25 @@
 import React from 'react';
-import Assets from 'assets';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {COLORS} from '@/constants/colors';
 
 const MainBottom = () => {
   return (
     <View style={styles.Container}>
-      <View style={styles.Section}>
-        <Image
-          source={Assets.location}
-          style={styles.LocationImage}
-          width={12}
-          height={12}
-        />
-        <Text>광안리</Text>
-      </View>
-      <View style={styles.Section}>
+      <TouchableOpacity>
+        <Text>사진첩</Text>
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <Text>포즈</Text>
+      </TouchableOpacity>
+      <View style={styles.CaptureButtonOutLine}>
         <TouchableOpacity style={styles.CaptureButton} />
       </View>
+      <TouchableOpacity>
+        <Text>화면전환</Text>
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <Text>설정</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -27,23 +30,27 @@ const styles = StyleSheet.create({
   Container: {
     width: '100%',
     height: '100%',
-    alignItems: 'center',
-  },
-  Section: {
     flexDirection: 'row',
-    marginBottom: 8,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
   },
-  LocationImage: {
-    marginRight: 8,
-  },
-  CaptureButton: {
-    width: 60,
-    height: 60,
+  CaptureButtonOutLine: {
+    width: 80,
+    height: 80,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#352E1E',
-    borderRadius: 30,
-    borderWidth: 2,
-    borderColor: 'white',
+    backgroundColor: COLORS.background,
+    borderRadius: 40,
+    borderWidth: 4,
+    borderColor: COLORS.main,
+  },
+  CaptureButton: {
+    width: 68,
+    height: 68,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLORS.main,
+    borderRadius: 34,
   },
 });
