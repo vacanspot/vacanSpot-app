@@ -4,12 +4,16 @@ import {COLORS} from '@/constants/colors';
 import PhotosButton from './PhotosButton';
 import CaptureButton from './CaptureButton';
 import {Camera} from 'react-native-vision-camera';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigation} from 'App';
 
 interface MainBottomProps {
   camera: React.RefObject<Camera>;
 }
 
 const MainBottom = ({camera}: MainBottomProps) => {
+  const navigation = useNavigation<StackNavigation>();
+
   return (
     <View style={styles.Container}>
       <View style={styles.Section}>
@@ -19,10 +23,14 @@ const MainBottom = ({camera}: MainBottomProps) => {
         <CaptureButton camera={camera} />
       </View>
       <View style={styles.Section}>
-        <TouchableOpacity style={styles.TouchArea}>
+        <TouchableOpacity
+          style={styles.TouchArea}
+          onPress={() => navigation.navigate('Pose')}>
           <Text>포즈</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.TouchArea}>
+        <TouchableOpacity
+          style={styles.TouchArea}
+          onPress={() => navigation.navigate('Favorite')}>
           <Text>하트</Text>
         </TouchableOpacity>
       </View>

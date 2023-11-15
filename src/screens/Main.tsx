@@ -15,7 +15,7 @@ const Main = () => {
   return (
     <View>
       <View style={styles.Header}>
-        <Image source={Assets.logo} width={32} height={32} />
+        <Image style={styles.Logo} source={Assets.logo} />
         <Text style={styles.HeaderAppName}>VACANSPOT</Text>
       </View>
       <View style={styles.CameraArea}>
@@ -31,6 +31,10 @@ const Main = () => {
 export default Main;
 
 const styles = StyleSheet.create({
+  Logo: {
+    width: 32,
+    height: 32,
+  },
   Header: {
     width: '100%',
     alignItems: 'center',
