@@ -1,4 +1,4 @@
-import {Splash} from '@/components';
+import {Splash} from '@/components/organisms';
 import {Main} from '@/screens';
 import React, {useState} from 'react';
 

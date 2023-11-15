@@ -1,4 +1,4 @@
-import FadeModal from '@/components/Modal/FadeModal';
+import {FadeModal} from '@/components/modals';
 import React from 'react';
 import {BackHandler, Text} from 'react-native';
 

@@ -6,7 +6,7 @@ import {
   getStatusBarHeight,
 } from 'react-native-iphone-screen-helper';
 import Assets from 'assets';
-import {CameraScreen, MainBottom} from '@/components';
+import {CameraScreen, MainBottom} from '@/components/organisms';
 
 const Main = () => {
   return (

@@ -1,5 +1,4 @@
 import React from 'react';
-import ReqGrantModal from '@/components/Modal/ReqGrantModal';
 import {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {
@@ -8,7 +7,7 @@ import {
   useCameraPermission,
 } from 'react-native-vision-camera';
 import {COLORS} from '@/constants/colors';
-import NoDeviceErrorModal from '@/components/Modal/NoDeviceErrorModal';
+import {NoDeviceErrorModal, ReqGrantModal} from '@/components/modals';
 
 const CameraScreen = () => {
   const device = useCameraDevice('back');
@@ -35,10 +34,7 @@ const CameraScreen = () => {
   if (showReqGrantModal) {
     return (
       <View style={styles.Wrapper}>
-        <ReqGrantModal
-          visible={showReqGrantModal}
-          setVisible={setShowReqGrantModal}
-        />
+        <ReqGrantModal visible setVisible={setShowReqGrantModal} />
       </View>
     );
   }

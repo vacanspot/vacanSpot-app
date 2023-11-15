@@ -1,4 +1,4 @@
-import FadeModal from '@/components/Modal/FadeModal';
+import {FadeModal} from '@/components/modals';
 import {COLORS} from '@/constants/colors';
 import React from 'react';
 import {Linking, StyleSheet, Text, TouchableOpacity} from 'react-native';
