@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: getStatusBarHeight(),
     paddingBottom: 12,
-    paddingHorizontal: 20,
+    paddingHorizontal: 12,
     backgroundColor: COLORS.painBeige,
     flexDirection: 'row',
   },

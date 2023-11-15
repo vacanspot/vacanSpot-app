@@ -52,11 +52,9 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 100,
     flexDirection: 'row',
-    justifyContent: 'space-around',
   },
   TouchArea: {
-    width: '100%',
-    height: '100%',
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },

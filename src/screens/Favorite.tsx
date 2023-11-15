@@ -1,12 +1,22 @@
+import {ImageList} from '@/components/organisms';
+import {COLORS} from '@/constants/colors';
 import React from 'react';
-import {Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 
 const Favorite = () => {
   return (
-    <View>
-      <Text>Favorite</Text>
+    <View style={styles.Container}>
+      <ImageList />
     </View>
   );
 };
 
 export default Favorite;
+
+const styles = StyleSheet.create({
+  Container: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: COLORS.painBeige,
+  },
+});

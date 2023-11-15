@@ -1,4 +1,5 @@
 import {Splash} from '@/components/organisms';
+import {COLORS} from '@/constants/colors';
 import {Favorite, Main, Pose} from '@/screens';
 import {NavigationContainer, NavigationProp} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -12,7 +13,11 @@ const App = () => {
   const Stack = createNativeStackNavigator();
   const [loaded, setLoaded] = useState(false);
 
-  return loaded ? (
+  if (!loaded) {
+    return <Splash setLoaded={setLoaded} />;
+  }
+
+  return (
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
@@ -22,12 +27,34 @@ const App = () => {
             headerShown: false,
           }}
         />
-        <Stack.Screen name="Pose" component={Pose} />
-        <Stack.Screen name="Favorite" component={Favorite} />
+        <Stack.Screen
+          name="Pose"
+          component={Pose}
+          options={{
+            headerStyle: {
+              backgroundColor: COLORS.painBeige,
+            },
+            headerShadowVisible: false,
+            headerTintColor: COLORS.main,
+            headerTitle: '포즈',
+            headerBackTitleVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="Favorite"
+          component={Favorite}
+          options={{
+            headerStyle: {
+              backgroundColor: COLORS.painBeige,
+            },
+            headerShadowVisible: false,
+            headerTintColor: COLORS.main,
+            headerTitle: '즐겨찾기',
+            headerBackTitleVisible: false,
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
-  ) : (
-    <Splash setLoaded={setLoaded} />
   );
 };
 
