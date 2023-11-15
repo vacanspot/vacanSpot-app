@@ -1,5 +1,5 @@
 import ReqGrantModal from './ReqGrantModal';
-import NoDeviceErrorModal from './NoDeviceErrorModal';
+import SystemErrorModal from './SystemErrorModal';
 import FadeModal from './FadeModal';
 
-export {ReqGrantModal, NoDeviceErrorModal, FadeModal};
+export {ReqGrantModal, SystemErrorModal, FadeModal};

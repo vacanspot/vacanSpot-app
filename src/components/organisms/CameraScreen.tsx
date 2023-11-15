@@ -7,7 +7,7 @@ import {
   useCameraPermission,
 } from 'react-native-vision-camera';
 import {COLORS} from '@/constants/colors';
-import {NoDeviceErrorModal, ReqGrantModal} from '@/components/modals';
+import {SystemErrorModal, ReqGrantModal} from '@/components/modals';
 
 const CameraScreen = () => {
   const device = useCameraDevice('back');
@@ -26,7 +26,7 @@ const CameraScreen = () => {
   if (!device) {
     return (
       <View style={styles.Wrapper}>
-        <NoDeviceErrorModal />
+        <SystemErrorModal text="카메라 정보를 가져올 수 없습니다." />
       </View>
     );
   }
