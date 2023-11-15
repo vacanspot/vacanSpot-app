@@ -9,7 +9,11 @@ import {
 import {COLORS} from '@/constants/colors';
 import {SystemErrorModal, ReqGrantModal} from '@/components/modals';
 
-const CameraScreen = () => {
+interface CameraScreenProps {
+  camera: React.RefObject<Camera>;
+}
+
+const CameraScreen = ({camera}: CameraScreenProps) => {
   const device = useCameraDevice('back');
   const {hasPermission, requestPermission} = useCameraPermission();
 
@@ -41,7 +45,13 @@ const CameraScreen = () => {
 
   return (
     <View style={styles.Wrapper}>
-      <Camera style={styles.Camera} device={device} isActive={true} />
+      <Camera
+        style={styles.Camera}
+        device={device}
+        isActive={true}
+        ref={camera}
+        photo
+      />
     </View>
   );
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {COLORS} from '@/constants/colors';
 import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
 import {
@@ -7,8 +7,11 @@ import {
 } from 'react-native-iphone-screen-helper';
 import Assets from 'assets';
 import {CameraScreen, MainBottom} from '@/components/organisms';
+import {Camera} from 'react-native-vision-camera';
 
 const Main = () => {
+  const camera = useRef<Camera>(null);
+
   return (
     <View>
       <View style={styles.Header}>
@@ -16,10 +19,10 @@ const Main = () => {
         <Text style={styles.HeaderAppName}>VACANSPOT</Text>
       </View>
       <View style={styles.CameraArea}>
-        <CameraScreen />
+        <CameraScreen camera={camera} />
       </View>
       <View style={styles.Bottom}>
-        <MainBottom />
+        <MainBottom camera={camera} />
       </View>
     </View>
   );
