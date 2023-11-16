@@ -10,9 +10,10 @@ import {Icon} from '@/components/atom';
 
 interface MainBottomProps {
   camera: React.RefObject<Camera>;
+  setIsTakenPhoto: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const MainBottom = ({camera}: MainBottomProps) => {
+const MainBottom = ({camera, setIsTakenPhoto}: MainBottomProps) => {
   const navigation = useNavigation<StackNavigation>();
 
   return (
@@ -21,7 +22,7 @@ const MainBottom = ({camera}: MainBottomProps) => {
         <PhotosButton />
       </View>
       <View style={styles.Section}>
-        <CaptureButton camera={camera} />
+        <CaptureButton camera={camera} setIsTakenPhoto={setIsTakenPhoto} />
       </View>
       <View style={styles.Section}>
         <Icon

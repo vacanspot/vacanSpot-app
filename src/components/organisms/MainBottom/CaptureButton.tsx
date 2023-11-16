@@ -7,15 +7,18 @@ import {ReqGrantModal} from '@/components/modals';
 
 interface CaptureButtonProps {
   camera: React.RefObject<Camera>;
+  setIsTakenPhoto: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const CaptureButton = ({camera}: CaptureButtonProps) => {
+const CaptureButton = ({camera, setIsTakenPhoto}: CaptureButtonProps) => {
   const [failToSavePhoto, setFailToSavePhoto] = useState(false);
 
   const takePhoto = () => {
     if (camera.current) {
+      setIsTakenPhoto(true);
+
       camera.current
-        .takePhoto()
+        .takePhoto({enableShutterSound: false})
         .then(photo => {
           CameraRoll.save(`file://${photo.path}`, {
             type: 'photo',

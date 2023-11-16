@@ -50,7 +50,7 @@ const CameraScreen = ({camera}: CameraScreenProps) => {
   }
 
   return (
-    <View style={styles.Wrapper}>
+    <>
       <Camera
         style={styles.Camera}
         device={device}
@@ -84,7 +84,7 @@ const CameraScreen = ({camera}: CameraScreenProps) => {
           height={24}
         />
       </View>
-    </View>
+    </>
   );
 };
 
