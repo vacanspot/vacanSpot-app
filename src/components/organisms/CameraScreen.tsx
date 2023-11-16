@@ -10,16 +10,20 @@ import {COLORS} from '@/constants/colors';
 import {SystemErrorModal, ReqGrantModal} from '@/components/modals';
 import Assets from 'assets';
 import {Icon} from '@/components/atom';
+import {useRecoilState} from 'recoil';
+import {cameraFlashState} from '@/recoil/atom/camera';
 
 interface CameraScreenProps {
   camera: React.RefObject<Camera>;
 }
 
 const CameraScreen = ({camera}: CameraScreenProps) => {
-  const device = useCameraDevice('back');
-  const {hasPermission, requestPermission} = useCameraPermission();
-
+  const [deviceType, setDeviceType] = useState<'back' | 'front'>('back');
   const [showReqGrantModal, setShowReqGrantModal] = useState(false);
+
+  const device = useCameraDevice(deviceType);
+  const {hasPermission, requestPermission} = useCameraPermission();
+  const [isOnFlash, setIsOnFlash] = useRecoilState(cameraFlashState);
 
   useEffect(() => {
     if (!hasPermission) {
@@ -61,27 +65,19 @@ const CameraScreen = ({camera}: CameraScreenProps) => {
       <View style={styles.Controller}>
         <Icon
           type="Transparent"
-          iconSource={Assets.zoom}
+          iconSource={isOnFlash ? Assets.flashOn : Assets.flashOff}
           width={24}
           height={24}
-        />
-        <Icon
-          type="Transparent"
-          iconSource={Assets.swapHori}
-          width={24}
-          height={24}
-        />
-        <Icon
-          type="Transparent"
-          iconSource={Assets.flashOff}
-          width={24}
-          height={24}
+          onPress={() => setIsOnFlash(!isOnFlash)}
         />
         <Icon
           type="Transparent"
           iconSource={Assets.switch}
           width={24}
           height={24}
+          onPress={() =>
+            setDeviceType(deviceType === 'back' ? 'front' : 'back')
+          }
         />
       </View>
     </>
@@ -102,11 +98,11 @@ const styles = StyleSheet.create({
   },
   Controller: {
     position: 'absolute',
-    width: '100%',
-    height: 44,
-    bottom: 12,
-    flexDirection: 'row',
-    justifyContent: 'center',
+    width: 44,
+    height: '100%',
+    top: 12,
+    right: 12,
     gap: 12,
+    justifyContent: 'flex-start',
   },
 });

@@ -4,6 +4,8 @@ import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Camera} from 'react-native-vision-camera';
 import {CameraRoll} from '@react-native-camera-roll/camera-roll';
 import {ReqGrantModal} from '@/components/modals';
+import {useRecoilValue} from 'recoil';
+import {cameraFlashState} from '@/recoil/atom/camera';
 
 interface CaptureButtonProps {
   camera: React.RefObject<Camera>;
@@ -12,13 +14,14 @@ interface CaptureButtonProps {
 
 const CaptureButton = ({camera, setIsTakenPhoto}: CaptureButtonProps) => {
   const [failToSavePhoto, setFailToSavePhoto] = useState(false);
+  const isOnFlash = useRecoilValue(cameraFlashState);
 
   const takePhoto = () => {
     if (camera.current) {
       setIsTakenPhoto(true);
 
       camera.current
-        .takePhoto({enableShutterSound: false})
+        .takePhoto({enableShutterSound: false, flash: isOnFlash ? 'on' : 'off'})
         .then(photo => {
           CameraRoll.save(`file://${photo.path}`, {
             type: 'photo',

@@ -45,11 +45,11 @@ export default Icon;
 const styles = {
   Primary: {
     TouchArea: {
-      flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
     } as ViewStyle,
     IconWrapper: {
+      width: 44,
       height: 44,
       alignItems: 'center',
       justifyContent: 'center',
@@ -63,14 +63,15 @@ const styles = {
   },
   Transparent: {
     TouchArea: {
-      width: 44,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: 'black',
-      borderRadius: 22,
-      opacity: 0.5,
     } as ViewStyle,
     IconWrapper: {
+      width: 44,
+      height: 44,
+      opacity: 0.5,
+      borderRadius: 22,
+      backgroundColor: 'black',
       alignItems: 'center',
       justifyContent: 'center',
     } as ViewStyle,
