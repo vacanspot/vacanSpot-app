@@ -31,9 +31,6 @@ const App = () => {
           name="Pose"
           component={Pose}
           options={{
-            headerStyle: {
-              backgroundColor: COLORS.painBeige,
-            },
             headerShadowVisible: false,
             headerTintColor: COLORS.main,
             headerTitle: '포즈',
@@ -44,9 +41,6 @@ const App = () => {
           name="Favorite"
           component={Favorite}
           options={{
-            headerStyle: {
-              backgroundColor: COLORS.painBeige,
-            },
             headerShadowVisible: false,
             headerTintColor: COLORS.main,
             headerTitle: '즐겨찾기',

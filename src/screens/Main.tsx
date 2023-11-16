@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     paddingTop: getStatusBarHeight(),
     paddingBottom: 12,
     paddingHorizontal: 12,
-    backgroundColor: COLORS.painBeige,
+    backgroundColor: COLORS.white,
     flexDirection: 'row',
   },
   HeaderAppName: {
@@ -63,6 +63,6 @@ const styles = StyleSheet.create({
     paddingTop: 12,
     paddingBottom: getBottomSpace(),
     paddingHorizontal: 20,
-    backgroundColor: COLORS.painBeige,
+    backgroundColor: COLORS.white,
   },
 });
