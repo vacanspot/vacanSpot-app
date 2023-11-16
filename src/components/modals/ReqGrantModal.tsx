@@ -1,15 +1,24 @@
 import {FadeModal} from '@/components/modals';
 import {COLORS} from '@/constants/colors';
 import React from 'react';
-import {Linking, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {Linking, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 interface ReqGrantModalProps {
+  text: string;
   visible: boolean;
   setVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  canClose?: boolean;
+  require?: boolean;
 }
 
-const ReqGrantModal = ({visible, setVisible}: ReqGrantModalProps) => {
-  const handleAndroidBackButton = () => {
+const ReqGrantModal = ({
+  text,
+  visible,
+  setVisible,
+  canClose = false,
+  require = true,
+}: ReqGrantModalProps) => {
+  const closeModal = () => {
     setVisible(false);
   };
 
@@ -20,18 +29,30 @@ const ReqGrantModal = ({visible, setVisible}: ReqGrantModalProps) => {
   return (
     <FadeModal
       visible={visible}
-      onRequestClose={handleAndroidBackButton}
+      onRequestClose={closeModal}
       content={
         <>
-          <Text style={styles.Title}>필수 권한 허용 안내</Text>
-          <Text>사진 촬영을 위해 카메라 권한 허용이</Text>
-          <Text>필요합니다.</Text>
+          {require && <Text style={styles.Title}>필수 권한 허용 안내</Text>}
+          <Text style={styles.Content}>{text} 허용이 필요합니다.</Text>
         </>
       }
       button={
-        <TouchableOpacity style={styles.CloseButton} onPress={linkToSetting}>
-          <Text style={styles.CloseButtonText}>설정으로 가기</Text>
-        </TouchableOpacity>
+        <View style={styles.ButtonWrapper}>
+          {canClose && (
+            <TouchableOpacity
+              style={styles.CancleButton}
+              onPress={closeModal}
+              activeOpacity={0.8}>
+              <Text style={styles.CancleButtonText}>닫기</Text>
+            </TouchableOpacity>
+          )}
+          <TouchableOpacity
+            style={styles.CloseButton}
+            onPress={linkToSetting}
+            activeOpacity={0.8}>
+            <Text style={styles.CloseButtonText}>설정으로 가기</Text>
+          </TouchableOpacity>
+        </View>
       }
     />
   );
@@ -44,14 +65,33 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 20,
   },
+  Content: {
+    textAlign: 'center',
+  },
+  ButtonWrapper: {
+    flexDirection: 'row',
+  },
   CloseButtonText: {
     color: COLORS.white,
   },
   CloseButton: {
-    width: '100%',
+    flex: 1,
     height: 40,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: COLORS.main,
+  },
+  CancleButtonText: {
+    color: COLORS.main,
+  },
+  CancleButton: {
+    flex: 1,
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: COLORS.white,
+    borderTopColor: COLORS.main,
+    borderColor: COLORS.white,
+    borderWidth: 1,
   },
 });

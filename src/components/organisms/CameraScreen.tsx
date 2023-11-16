@@ -40,7 +40,11 @@ const CameraScreen = ({camera}: CameraScreenProps) => {
   if (showReqGrantModal) {
     return (
       <View style={styles.Wrapper}>
-        <ReqGrantModal visible setVisible={setShowReqGrantModal} />
+        <ReqGrantModal
+          text={`사진 촬영을 위해 카메라 권한${'\n'}`}
+          visible
+          setVisible={setShowReqGrantModal}
+        />
       </View>
     );
   }

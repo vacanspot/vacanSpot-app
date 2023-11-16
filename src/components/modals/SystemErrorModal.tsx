@@ -1,20 +1,32 @@
+import React, {useState} from 'react';
 import {Button} from '@/components/atom';
 import {FadeModal} from '@/components/modals';
-import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
 interface SystemErrorModalProps {
   text: string;
+  visible?: boolean;
+  setVisible?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const SystemErrorModal = ({text}: SystemErrorModalProps) => {
+const SystemErrorModal = ({
+  text,
+  visible,
+  setVisible,
+}: SystemErrorModalProps) => {
   const [showModal, setShowModal] = useState(true);
 
-  const closeModal = () => setShowModal(false);
+  const closeModal = () => {
+    if (setVisible) {
+      setVisible(false);
+    } else {
+      setShowModal(false);
+    }
+  };
 
   return (
     <FadeModal
-      visible={showModal}
+      visible={visible ?? showModal}
       onRequestClose={closeModal}
       content={<Text>{text}</Text>}
       button={

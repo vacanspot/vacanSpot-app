@@ -3,7 +3,7 @@ import {COLORS} from '@/constants/colors';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Camera} from 'react-native-vision-camera';
 import {CameraRoll} from '@react-native-camera-roll/camera-roll';
-import {SystemErrorModal} from '@/components/modals';
+import {ReqGrantModal} from '@/components/modals';
 
 interface CaptureButtonProps {
   camera: React.RefObject<Camera>;
@@ -27,7 +27,11 @@ const CaptureButton = ({camera}: CaptureButtonProps) => {
 
   return (
     <>
-      {failToSavePhoto && <SystemErrorModal text="사진 저장을 실패했습니다." />}
+      <ReqGrantModal
+        text={`촬영 이미지를 저장하기 위해${'\n'}사진첩 접근 권한`}
+        visible={failToSavePhoto}
+        setVisible={setFailToSavePhoto}
+      />
       <TouchableOpacity style={styles.TouchArea} onPress={takePhoto}>
         <View style={styles.CaptureButtonOutLine}>
           <View style={styles.CaptureButton} />
