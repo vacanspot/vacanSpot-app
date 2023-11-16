@@ -11,7 +11,10 @@ interface ButtonProps {
 
 const Button = ({children, type = 'Primary', onPress}: ButtonProps) => {
   return (
-    <TouchableOpacity style={styles[type].CloseButton} onPress={onPress}>
+    <TouchableOpacity
+      style={styles[type].CloseButton}
+      onPress={onPress}
+      activeOpacity={0.8}>
       <Text style={styles[type].CloseButtonText}>{children}</Text>
     </TouchableOpacity>
   );
