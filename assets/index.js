@@ -12,6 +12,8 @@ const assets = {
   switch: require('./icon-switch.png'),
   zoom: require('./icon-zoom.png'),
   photo: require('./icon-photo.png'),
+  registerImage: require('./icon-register-image.png'),
+  cancle: require('./icon-cancel.png'),
 };
 
 export default assets;
