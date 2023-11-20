@@ -1,14 +1,11 @@
-import api from '../../util/api';
+import {LocationParam, getAddress} from '@/apis/address';
+import instance from '@/apis/instance';
+import {QUERY_KEY} from '@/constants/queryKey';
 import {useMutation, useQuery} from 'react-query';
-
-interface SearchParam {
-  x: string;
-  y: string;
-}
 
 export const useSearchAddress = () => {
   return useMutation(async (params: {x: number | null; y: number}) => {
-    const response = await api.get<string>('/address', {
+    const response = await instance.get<string>('/address', {
       params,
     });
 
@@ -16,9 +13,13 @@ export const useSearchAddress = () => {
   });
 };
 
+export const useGetAddress = (state: LocationParam) => {
+  return useQuery([QUERY_KEY.address, state], () => getAddress(state));
+};
+
 export const useSearchImagesByAddress = () => {
   return useMutation(async (params: {x: number | null; y: number}) => {
-    const response = await api.get<string[]>('/recommend/images', {
+    const response = await instance.get<string[]>('/recommend/images', {
       params,
     });
 
@@ -28,9 +29,12 @@ export const useSearchImagesByAddress = () => {
 
 export const useSearchImagesByKeyword = (params: {q: string}) => {
   return useQuery('SearchImagesByKeyword', async () => {
-    const response = await api.get<{images: string[]}>('/recommend/images', {
-      params,
-    });
+    const response = await instance.get<{images: string[]}>(
+      '/recommend/images',
+      {
+        params,
+      },
+    );
 
     return response.data;
   });

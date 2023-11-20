@@ -1,16 +1,13 @@
 import axios from 'axios';
-import {API_URL} from '../constants/constant';
 
 const instance = axios.create({
-  baseURL: API_URL,
+  timeout: 2500,
 });
 
 const apiStartTime = new Date().getTime();
 instance.interceptors.request.use(
   config => {
-    console.log(
-      `📡  API REQUEST : ${config?.method ?? ''} ${config?.url ?? ''}`,
-    );
+    console.log(`📡  API REQUEST : ${config.method ?? ''} ${config.url ?? ''}`);
     return config;
   },
   error => {

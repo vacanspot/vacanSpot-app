@@ -1,9 +1,30 @@
 import {ImageList} from '@/components/organisms';
 import {COLORS} from '@/constants/colors';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 
+import Geolocation from '@react-native-community/geolocation';
+import {useGetAddress} from '@/hook/query/search';
+
 const Pose = () => {
+  const [location, setLocation] = useState({
+    x: '',
+    y: '',
+  });
+
+  const {data} = useGetAddress(location);
+
+  useEffect(() => {
+    Geolocation.getCurrentPosition(info =>
+      setLocation({
+        x: `${info.coords.longitude}`,
+        y: `${info.coords.latitude}`,
+      }),
+    );
+  }, []);
+
+  console.log(location, data);
+
   return (
     <View style={styles.Container}>
       <ImageList />
