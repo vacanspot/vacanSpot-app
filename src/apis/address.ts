@@ -6,7 +6,7 @@ export interface LocationParam {
 }
 
 export const getAddress = async (params: LocationParam) => {
-  const response = await instance.get('/address', {
+  const response = await instance.get('/api/address', {
     params,
   });
 

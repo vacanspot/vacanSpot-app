@@ -1,6 +1,8 @@
+import {API_URL} from '@/constants/system';
 import axios from 'axios';
 
 const instance = axios.create({
+  baseURL: API_URL,
   timeout: 2500,
 });
 
@@ -28,6 +30,7 @@ instance.interceptors.response.use(
     return response.data;
   },
   async err => {
+    console.log(JSON.stringify(err));
     if (err?.code === 'ERR_NETWORK') {
       return Promise.reject({
         resultCode: -9999,
