@@ -40,9 +40,6 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = vacanSpot/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = vacanSpot/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-vacanSpot-vacanSpotTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-vacanSpot-vacanSpotTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2E7C04BD2B08F4880067BFDF /* SpoqaHanSansNeo-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Bold.ttf"; sourceTree = "<group>"; };
-		2E7C04BE2B08F4890067BFDF /* SpoqaHanSansNeo-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Regular.ttf"; sourceTree = "<group>"; };
-		2E7C04BF2B08F4890067BFDF /* SpoqaHanSansNeo-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Medium.ttf"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-vacanSpot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vacanSpot.debug.xcconfig"; path = "Target Support Files/Pods-vacanSpot/Pods-vacanSpot.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-vacanSpot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vacanSpot.release.xcconfig"; path = "Target Support Files/Pods-vacanSpot/Pods-vacanSpot.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-vacanSpot-vacanSpotTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vacanSpot-vacanSpotTests.debug.xcconfig"; path = "Target Support Files/Pods-vacanSpot-vacanSpotTests/Pods-vacanSpot-vacanSpotTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -115,16 +112,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		2E7C04BC2B08F45A0067BFDF /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				2E7C04BD2B08F4880067BFDF /* SpoqaHanSansNeo-Bold.ttf */,
-				2E7C04BF2B08F4890067BFDF /* SpoqaHanSansNeo-Medium.ttf */,
-				2E7C04BE2B08F4890067BFDF /* SpoqaHanSansNeo-Regular.ttf */,
-			);
-			path = Fonts;
-			sourceTree = "<group>";
-		};
 		4E5433F3420D447EB14EEA1E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,7 +132,6 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				2E7C04BC2B08F45A0067BFDF /* Fonts */,
 				13B07FAE1A68108700A75B9A /* vacanSpot */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* vacanSpotTests */,
