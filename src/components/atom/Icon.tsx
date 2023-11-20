@@ -5,6 +5,7 @@ import {
   ImageProps,
   ImageSourcePropType,
   Text,
+  TextStyle,
   TouchableOpacity,
   View,
   ViewStyle,
@@ -59,7 +60,9 @@ const styles = {
     } as ImageProps,
     IconText: {
       color: COLORS.main,
-    },
+      fontSize: 11,
+      fontFamily: 'SpoqaHanSansNeo-Medium',
+    } as TextStyle,
   },
   Transparent: {
     TouchArea: {

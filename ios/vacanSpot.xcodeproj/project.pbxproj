@@ -12,9 +12,11 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		4CC74F85A20E45DA802E5501 /* SpoqaHanSansNeo-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B3F85ED3D5B344DBBFEC325C /* SpoqaHanSansNeo-Bold.ttf */; };
 		7699B88040F8A987B510C191 /* libPods-vacanSpot-vacanSpotTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-vacanSpot-vacanSpotTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		F12E522C2AA2F93400A2DA58 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = F12E522B2AA2F93400A2DA58 /* Fonts */; };
+		BF6A2FED621649C8A0ECA439 /* SpoqaHanSansNeo-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 65927C13926F42B2AF2DF85B /* SpoqaHanSansNeo-Regular.ttf */; };
+		C070E6D6A6C44F59A1422C2B /* SpoqaHanSansNeo-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F0B6ED53E7AE44FA8260A45B /* SpoqaHanSansNeo-Medium.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,14 +40,19 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = vacanSpot/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = vacanSpot/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-vacanSpot-vacanSpotTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-vacanSpot-vacanSpotTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E7C04BD2B08F4880067BFDF /* SpoqaHanSansNeo-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Bold.ttf"; sourceTree = "<group>"; };
+		2E7C04BE2B08F4890067BFDF /* SpoqaHanSansNeo-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Regular.ttf"; sourceTree = "<group>"; };
+		2E7C04BF2B08F4890067BFDF /* SpoqaHanSansNeo-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Medium.ttf"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-vacanSpot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vacanSpot.debug.xcconfig"; path = "Target Support Files/Pods-vacanSpot/Pods-vacanSpot.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-vacanSpot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vacanSpot.release.xcconfig"; path = "Target Support Files/Pods-vacanSpot/Pods-vacanSpot.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-vacanSpot-vacanSpotTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vacanSpot-vacanSpotTests.debug.xcconfig"; path = "Target Support Files/Pods-vacanSpot-vacanSpotTests/Pods-vacanSpot-vacanSpotTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-vacanSpot.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-vacanSpot.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		65927C13926F42B2AF2DF85B /* SpoqaHanSansNeo-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SpoqaHanSansNeo-Regular.ttf"; path = "../assets/fonts/SpoqaHanSansNeo-Regular.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = vacanSpot/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-vacanSpot-vacanSpotTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vacanSpot-vacanSpotTests.release.xcconfig"; path = "Target Support Files/Pods-vacanSpot-vacanSpotTests/Pods-vacanSpot-vacanSpotTests.release.xcconfig"; sourceTree = "<group>"; };
+		B3F85ED3D5B344DBBFEC325C /* SpoqaHanSansNeo-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SpoqaHanSansNeo-Bold.ttf"; path = "../assets/fonts/SpoqaHanSansNeo-Bold.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		F12E522B2AA2F93400A2DA58 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
+		F0B6ED53E7AE44FA8260A45B /* SpoqaHanSansNeo-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SpoqaHanSansNeo-Medium.ttf"; path = "../assets/fonts/SpoqaHanSansNeo-Medium.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +115,26 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		2E7C04BC2B08F45A0067BFDF /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				2E7C04BD2B08F4880067BFDF /* SpoqaHanSansNeo-Bold.ttf */,
+				2E7C04BF2B08F4890067BFDF /* SpoqaHanSansNeo-Medium.ttf */,
+				2E7C04BE2B08F4890067BFDF /* SpoqaHanSansNeo-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		4E5433F3420D447EB14EEA1E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B3F85ED3D5B344DBBFEC325C /* SpoqaHanSansNeo-Bold.ttf */,
+				F0B6ED53E7AE44FA8260A45B /* SpoqaHanSansNeo-Medium.ttf */,
+				65927C13926F42B2AF2DF85B /* SpoqaHanSansNeo-Regular.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -118,13 +145,14 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				F12E522B2AA2F93400A2DA58 /* Fonts */,
+				2E7C04BC2B08F45A0067BFDF /* Fonts */,
 				13B07FAE1A68108700A75B9A /* vacanSpot */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* vacanSpotTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				4E5433F3420D447EB14EEA1E /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -245,9 +273,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F12E522C2AA2F93400A2DA58 /* Fonts in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				4CC74F85A20E45DA802E5501 /* SpoqaHanSansNeo-Bold.ttf in Resources */,
+				C070E6D6A6C44F59A1422C2B /* SpoqaHanSansNeo-Medium.ttf in Resources */,
+				BF6A2FED621649C8A0ECA439 /* SpoqaHanSansNeo-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -509,8 +539,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.vacanspot.m;
 				PRODUCT_NAME = vacanSpot;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -540,7 +573,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.vacanspot.m;
 				PRODUCT_NAME = vacanSpot;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
