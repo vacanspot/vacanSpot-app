@@ -17,7 +17,7 @@ const MainBottom = ({camera, setIsTakenPhoto}: MainBottomProps) => {
   const navigation = useNavigation<StackNavigation>();
 
   return (
-    <View style={styles.Container}>
+    <>
       <View style={styles.Section}>
         <PhotosButton />
       </View>
@@ -35,29 +35,22 @@ const MainBottom = ({camera, setIsTakenPhoto}: MainBottomProps) => {
           type="Primary"
           onPress={() => navigation.navigate('Favorite')}
           iconSource={Assets.favorite}
-          iconText="즐겨찾기"
+          iconText="MY"
           width={24}
           height={24}
         />
       </View>
-    </View>
+    </>
   );
 };
 
 export default MainBottom;
 
 const styles = StyleSheet.create({
-  Container: {
-    width: '100%',
-    height: '100%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
   Section: {
     flex: 1,
     height: 100,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
   },
 });

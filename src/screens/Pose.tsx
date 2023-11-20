@@ -17,6 +17,6 @@ const styles = StyleSheet.create({
   Container: {
     width: '100%',
     height: '100%',
-    backgroundColor: COLORS.painBeige,
+    backgroundColor: COLORS.white,
   },
 });

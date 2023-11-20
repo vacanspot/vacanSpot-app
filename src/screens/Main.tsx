@@ -47,7 +47,7 @@ const Main = () => {
   });
 
   return (
-    <View>
+    <View style={styles.Container}>
       <View style={styles.Header}>
         <Image style={styles.Logo} source={Assets.logo} />
         <Text style={styles.HeaderAppName}>VACANSPOT</Text>
@@ -66,6 +66,10 @@ const Main = () => {
 export default Main;
 
 const styles = StyleSheet.create({
+  Container: {
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
+  },
   Logo: {
     width: 32,
     height: 32,
@@ -83,11 +87,12 @@ const styles = StyleSheet.create({
     marginTop: 2,
     marginLeft: 2,
     color: COLORS.main,
+    fontFamily: 'SpoqaHanSansNeo-Bold',
   },
   CameraArea: {
     width: '100%',
     height:
-      Dimensions.get('screen').height -
+      Dimensions.get('window').height -
       getStatusBarHeight() -
       getBottomSpace() -
       220,
@@ -103,10 +108,11 @@ const styles = StyleSheet.create({
   },
   Bottom: {
     width: '100%',
-    height: 220,
-    paddingTop: 12,
+    height: 180 + getBottomSpace(),
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     paddingBottom: getBottomSpace(),
-    paddingHorizontal: 20,
     backgroundColor: COLORS.white,
   },
 });

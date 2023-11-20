@@ -21,7 +21,7 @@ const App = () => {
   }
 
   return (
-    <RealmProvider schema={[ImageSchema]} schemaVersion={4}>
+    <RealmProvider schema={[ImageSchema]} schemaVersion={4} inMemory={true}>
       <RecoilRoot>
         <NavigationContainer>
           <Stack.Navigator>
@@ -40,6 +40,9 @@ const App = () => {
                 headerTintColor: COLORS.main,
                 headerTitle: '포즈',
                 headerBackTitleVisible: false,
+                headerTitleStyle: {
+                  fontFamily: 'SpoqaHanSansNeo-Bold',
+                },
               }}
             />
             <Stack.Screen
@@ -50,6 +53,9 @@ const App = () => {
                 headerTintColor: COLORS.main,
                 headerTitle: '즐겨찾기',
                 headerBackTitleVisible: false,
+                headerTitleStyle: {
+                  fontFamily: 'SpoqaHanSansNeo-Bold',
+                },
               }}
             />
           </Stack.Navigator>
