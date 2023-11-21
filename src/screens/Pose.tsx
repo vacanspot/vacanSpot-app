@@ -4,7 +4,6 @@ import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs
 import Geolocation from '@react-native-community/geolocation';
 import {useGetAddress} from '@/hook/query/search';
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text} from 'react-native';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -15,10 +14,6 @@ const Pose = () => {
   });
 
   const {data} = useGetAddress(location);
-
-  const getLabel = (addresssName?: string) => {
-    return <Text style={styles.LabelText}>{addresssName}</Text>;
-  };
 
   useEffect(() => {
     Geolocation.getCurrentPosition(info =>
@@ -39,7 +34,7 @@ const Pose = () => {
       }}>
       <Tab.Screen
         name="장소"
-        options={{tabBarLabel: () => getLabel(data)}}
+        options={{tabBarLabel: data}}
         children={() => <SearchLocation location={location} />}
       />
       <Tab.Screen name="검색" component={SearchKeyword} />
@@ -48,11 +43,3 @@ const Pose = () => {
 };
 
 export default Pose;
-
-const styles = StyleSheet.create({
-  LabelText: {
-    fontSize: 14,
-    color: COLORS.main,
-    fontFamily: 'SpoqaHanSansNeo-Medium',
-  },
-});

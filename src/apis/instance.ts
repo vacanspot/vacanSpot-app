@@ -10,7 +10,7 @@ const apiStartTime = new Date().getTime();
 instance.interceptors.request.use(
   config => {
     console.log(
-      `📡  API REQUEST : ${config.method ?? ''} ${
+      `📡 API REQUEST : ${config.method ?? ''} ${
         config.url ?? ''
       } ${JSON.stringify(config.params)}`,
     );

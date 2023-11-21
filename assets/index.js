@@ -14,6 +14,7 @@ const assets = {
   photo: require('./icon-photo.png'),
   registerImage: require('./icon-register-image.png'),
   cancle: require('./icon-cancel.png'),
+  setting: require('./icon-setting.png'),
 };
 
 export default assets;

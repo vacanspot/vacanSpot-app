@@ -1,20 +1,13 @@
 import React, {useEffect, useMemo, useRef, useState} from 'react';
 import {COLORS} from '@/constants/colors';
-import {
-  Animated,
-  Dimensions,
-  Image,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {Animated, Dimensions, StyleSheet, View} from 'react-native';
 import {
   getBottomSpace,
   getStatusBarHeight,
 } from 'react-native-iphone-screen-helper';
-import Assets from 'assets';
 import {CameraScreen, MainBottom} from '@/components/organisms';
 import {Camera} from 'react-native-vision-camera';
+import Header from '@/components/organisms/Header';
 
 const Main = () => {
   const camera = useRef<Camera>(null);
@@ -48,10 +41,7 @@ const Main = () => {
 
   return (
     <View style={styles.Container}>
-      <View style={styles.Header}>
-        <Image style={styles.Logo} source={Assets.logo} />
-        <Text style={styles.HeaderAppName}>VACANSPOT</Text>
-      </View>
+      <Header />
       <View style={styles.CameraArea}>
         <Animated.View style={{...styles.AnimationView, backgroundColor}} />
         <CameraScreen camera={camera} />
@@ -69,25 +59,6 @@ const styles = StyleSheet.create({
   Container: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
-  },
-  Logo: {
-    width: 32,
-    height: 32,
-  },
-  Header: {
-    width: '100%',
-    alignItems: 'center',
-    paddingTop: getStatusBarHeight(),
-    paddingBottom: 12,
-    paddingHorizontal: 12,
-    backgroundColor: COLORS.white,
-    flexDirection: 'row',
-  },
-  HeaderAppName: {
-    marginTop: 2,
-    marginLeft: 2,
-    color: COLORS.main,
-    fontFamily: 'SpoqaHanSansNeo-Bold',
   },
   CameraArea: {
     width: '100%',

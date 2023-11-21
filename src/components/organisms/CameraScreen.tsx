@@ -47,8 +47,8 @@ const CameraScreen = ({camera}: CameraScreenProps) => {
   const isFocussed = useIsFocused();
   const isForeground = useIsForeground();
   const isActive = isFocussed && isForeground;
-  const {hasPermission, requestPermission} = useCameraPermission();
 
+  const {hasPermission, requestPermission} = useCameraPermission();
   const device = useCameraDevice(deviceType);
   const zoom = useSharedValue(0);
   const minZoom = device?.minZoom ?? 1;
@@ -58,7 +58,6 @@ const CameraScreen = ({camera}: CameraScreenProps) => {
     android: Dimensions.get('screen').height - getBottomSpace(),
     ios: Dimensions.get('window').height,
   }) as number;
-
   const screenAspectRatio = SCREEN_HEIGHT / Dimensions.get('window').width;
 
   const format = useCameraFormat(device, [
