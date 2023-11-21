@@ -9,7 +9,11 @@ const instance = axios.create({
 const apiStartTime = new Date().getTime();
 instance.interceptors.request.use(
   config => {
-    console.log(`📡  API REQUEST : ${config.method ?? ''} ${config.url ?? ''}`);
+    console.log(
+      `📡  API REQUEST : ${config.method ?? ''} ${
+        config.url ?? ''
+      } ${JSON.stringify(config.params)}`,
+    );
     return config;
   },
   error => {
