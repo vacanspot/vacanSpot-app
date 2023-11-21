@@ -1,33 +1,31 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
-import Geolocation from '@react-native-community/geolocation';
-import {useGetAddress} from '@/hook/query/search';
 import {COLORS} from '@/constants/colors';
 import {ImageList} from '@/components/organisms';
+import {useGetImagesByAddress} from '@/hook/query/search';
 
-const SearchLocation = () => {
-  const [location, setLocation] = useState({
-    x: '',
-    y: '',
-  });
+interface SearchLocationProps {
+  location: {
+    x: string;
+    y: string;
+  };
+}
 
-  const {data} = useGetAddress(location);
-
-  useEffect(() => {
-    Geolocation.getCurrentPosition(info =>
-      setLocation({
-        x: `${info.coords.longitude}`,
-        y: `${info.coords.latitude}`,
-      }),
-    );
-  }, []);
-
-  console.log(location, data);
+const SearchLocation = ({location}: SearchLocationProps) => {
+  const {data} = useGetImagesByAddress(location);
 
   return (
     <View style={styles.Container}>
-      <ImageList />
+      <ImageList
+        data={data?.map(item => {
+          return {
+            id: Math.random().toString(16).substring(2, 11),
+            uri: item,
+            canDelete: false,
+          };
+        })}
+      />
     </View>
   );
 };

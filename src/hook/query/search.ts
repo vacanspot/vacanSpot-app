@@ -1,30 +1,24 @@
-import {LocationParam, getAddress} from '@/apis/address';
+import {getAddress} from '@/apis/address';
+import {getByLocation} from '@/apis/images';
 import instance from '@/apis/instance';
 import {QUERY_KEY} from '@/constants/queryKey';
-import {useMutation, useQuery} from 'react-query';
-
-export const useSearchAddress = () => {
-  return useMutation(async (params: {x: number | null; y: number}) => {
-    const response = await instance.get<string>('/address', {
-      params,
-    });
-
-    return response.data;
-  });
-};
+import {LocationParam} from '@/model/RequestParams';
+import {useQuery} from 'react-query';
 
 export const useGetAddress = (state: LocationParam) => {
-  return useQuery([QUERY_KEY.address, state], () => getAddress(state));
+  return useQuery<string>([QUERY_KEY.address, state], () => getAddress(state), {
+    enabled: state.x !== '' && state.y !== '',
+  });
 };
 
-export const useSearchImagesByAddress = () => {
-  return useMutation(async (params: {x: number | null; y: number}) => {
-    const response = await instance.get<string[]>('/recommend/images', {
-      params,
-    });
-
-    return response.data;
-  });
+export const useGetImagesByAddress = (state: LocationParam) => {
+  return useQuery<Array<string>>(
+    [QUERY_KEY.byLocation, state],
+    () => getByLocation(state),
+    {
+      enabled: state.x !== '' && state.y !== '',
+    },
+  );
 };
 
 export const useSearchImagesByKeyword = (params: {q: string}) => {

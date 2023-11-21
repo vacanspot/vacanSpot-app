@@ -18,12 +18,11 @@ interface ImageItemProps {
 
 const ImageItem = ({uri, canDelete, handleDelete}: ImageItemProps) => {
   const navigation = useNavigation<StackNavigation>();
-  const dummy = require('assets/dummy_image.png');
 
   return (
     <TouchableOpacity onPress={() => navigation.goBack()}>
       <View style={styles.Container}>
-        <Image source={uri ? {uri} : dummy} style={styles.ImageBox} />
+        <Image source={{uri}} style={styles.ImageBox} />
         {canDelete && (
           <TouchableOpacity
             style={styles.CancelIconWrapper}
@@ -49,7 +48,7 @@ const styles = StyleSheet.create({
   },
   CancelIconWrapper: {
     position: 'absolute',
-    right: -4,
+    right: -8,
     top: 4,
     width: 44,
     height: 44,

@@ -27,7 +27,7 @@ instance.interceptors.response.use(
         (apiEndTime - apiStartTime) / 100,
       )}ms]`,
     );
-    return response.data;
+    return response;
   },
   async err => {
     console.log(JSON.stringify(err));
