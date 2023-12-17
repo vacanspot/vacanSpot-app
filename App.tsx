@@ -7,7 +7,6 @@ import React, {useMemo, useState} from 'react';
 import {RecoilRoot} from 'recoil';
 import {RealmProvider} from '@realm/react';
 import ImageSchema from '@/model/ImageSchema';
-import {QueryClient, QueryClientProvider} from 'react-query';
 
 export type ScreenNames = ['Main', 'Pose', 'Favorite', 'Setting'];
 export type RootStackParamList = Record<ScreenNames[number], undefined>;
@@ -15,7 +14,6 @@ export type StackNavigation = NavigationProp<RootStackParamList>;
 
 const App = () => {
   const Stack = createNativeStackNavigator();
-  const queryClient = new QueryClient();
   const [loaded, setLoaded] = useState(false);
 
   const HeaderDefaultOption = useMemo(() => {
@@ -36,34 +34,32 @@ const App = () => {
   return (
     <RealmProvider schema={[ImageSchema]} schemaVersion={4} inMemory={true}>
       <RecoilRoot>
-        <QueryClientProvider client={queryClient}>
-          <NavigationContainer>
-            <Stack.Navigator>
-              <Stack.Screen
-                name="Main"
-                component={Main}
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name="Pose"
-                component={Pose}
-                options={{...HeaderDefaultOption, headerTitle: '포즈'}}
-              />
-              <Stack.Screen
-                name="Favorite"
-                component={Favorite}
-                options={{...HeaderDefaultOption, headerTitle: 'MY'}}
-              />
-              <Stack.Screen
-                name="Setting"
-                component={Favorite}
-                options={{...HeaderDefaultOption, headerTitle: '서비스 정보'}}
-              />
-            </Stack.Navigator>
-          </NavigationContainer>
-        </QueryClientProvider>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="Main"
+              component={Main}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="Pose"
+              component={Pose}
+              options={{...HeaderDefaultOption, headerTitle: '포즈'}}
+            />
+            <Stack.Screen
+              name="Favorite"
+              component={Favorite}
+              options={{...HeaderDefaultOption, headerTitle: 'MY'}}
+            />
+            <Stack.Screen
+              name="Setting"
+              component={Favorite}
+              options={{...HeaderDefaultOption, headerTitle: '서비스 정보'}}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
       </RecoilRoot>
     </RealmProvider>
   );
