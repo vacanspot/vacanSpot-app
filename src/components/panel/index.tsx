@@ -1,4 +1,4 @@
-import SearchLocation from './SearchLocation';
-import SearchKeyword from './SearchKeyword';
+import DefaultPose from './DefaultPose';
+import PersonalPose from './PersonalPose';
 
-export {SearchLocation, SearchKeyword};
+export {DefaultPose, PersonalPose};

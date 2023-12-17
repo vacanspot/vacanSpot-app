@@ -1,11 +1,11 @@
 import {ImageItem} from '@/components/molecules';
 import React from 'react';
-import {StyleSheet, View, FlatList} from 'react-native';
+import {StyleSheet, View, FlatList, ImageSourcePropType} from 'react-native';
 
 interface ImageListProps {
   data?: Array<{
     id: string;
-    uri: string;
+    image: ImageSourcePropType;
     canDelete?: boolean;
     handleDelete?: () => void;
   }>;
@@ -20,7 +20,7 @@ const ImageList = ({data, listHeaderComponent}: ImageListProps) => {
         data={data}
         renderItem={({item}) => (
           <ImageItem
-            uri={item.uri}
+            image={item.image}
             canDelete={item.canDelete}
             handleDelete={item.handleDelete}
           />

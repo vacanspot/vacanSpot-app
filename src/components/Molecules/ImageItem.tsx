@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Dimensions,
   Image,
+  ImageSourcePropType,
   StyleSheet,
   TouchableOpacity,
   View,
@@ -9,20 +10,21 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigation} from 'App';
 import Assets from 'assets';
+import {COLORS} from '@/constants/colors';
 
 interface ImageItemProps {
-  uri: string;
+  image: ImageSourcePropType;
   canDelete?: boolean;
   handleDelete?: () => void;
 }
 
-const ImageItem = ({uri, canDelete, handleDelete}: ImageItemProps) => {
+const ImageItem = ({image, canDelete, handleDelete}: ImageItemProps) => {
   const navigation = useNavigation<StackNavigation>();
 
   return (
     <TouchableOpacity onPress={() => navigation.goBack()}>
       <View style={styles.Container}>
-        <Image source={{uri}} style={styles.ImageBox} />
+        <Image source={image} style={styles.ImageBox} />
         {canDelete && (
           <TouchableOpacity
             style={styles.CancelIconWrapper}
@@ -41,6 +43,7 @@ const styles = StyleSheet.create({
   Container: {
     width: (Dimensions.get('screen').width - 1 * 4) / 3,
     height: (Dimensions.get('screen').width - 1 * 4) / 3,
+    backgroundColor: COLORS.black,
   },
   ImageBox: {
     width: '100%',
