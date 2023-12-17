@@ -1,6 +1,6 @@
 import React from 'react';
 import {useEffect, useState} from 'react';
-import {Dimensions, Platform, StyleSheet, View} from 'react-native';
+import {Dimensions, Image, Platform, StyleSheet, View} from 'react-native';
 import {
   Camera,
   useCameraDevice,
@@ -11,8 +11,8 @@ import {COLORS} from '@/constants/colors';
 import {SystemErrorModal, ReqGrantModal} from '@/components/modals';
 import Assets from 'assets';
 import {Icon} from '@/components/atom';
-import {useRecoilState} from 'recoil';
-import {cameraFlashState} from '@/recoil/atom/camera';
+import {useRecoilState, useRecoilValue} from 'recoil';
+import {cameraFlashState, poseReferenceState} from '@/recoil/atom/camera';
 import Reanimated, {
   Extrapolate,
   interpolate,
@@ -43,7 +43,7 @@ const CameraScreen = ({camera}: CameraScreenProps) => {
   const [deviceType, setDeviceType] = useState<'back' | 'front'>('back');
   const [showReqGrantModal, setShowReqGrantModal] = useState(false);
   const [isOnFlash, setIsOnFlash] = useRecoilState(cameraFlashState);
-
+  const poseReference = useRecoilValue(poseReferenceState);
   const isFocussed = useIsFocused();
   const isForeground = useIsForeground();
   const isActive = isFocussed && isForeground;
@@ -149,7 +149,7 @@ const CameraScreen = ({camera}: CameraScreenProps) => {
           </Reanimated.View>
         </PinchGestureHandler>
       </GestureHandlerRootView>
-      <View style={styles.Controller}>
+      <View style={styles.IconController}>
         <Icon
           type="Transparent"
           iconSource={isOnFlash ? Assets.flashOn : Assets.flashOff}
@@ -167,6 +167,14 @@ const CameraScreen = ({camera}: CameraScreenProps) => {
           }
         />
       </View>
+      {poseReference && (
+        <View style={styles.PoseController}>
+          <Image
+            source={poseReference}
+            style={{width: '100%', height: '100%', resizeMode: 'contain'}}
+          />
+        </View>
+      )}
     </>
   );
 };
@@ -183,7 +191,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  Controller: {
+  IconController: {
     position: 'absolute',
     width: 44,
     height: '100%',
@@ -191,5 +199,15 @@ const styles = StyleSheet.create({
     right: 12,
     gap: 12,
     justifyContent: 'flex-start',
+  },
+  PoseController: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    top: 0,
+    left: 0,
+    zIndex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

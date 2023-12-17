@@ -7,8 +7,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {StackNavigation} from 'App';
 import Assets from 'assets';
 import {COLORS} from '@/constants/colors';
 
@@ -16,13 +14,17 @@ interface ImageItemProps {
   image: ImageSourcePropType;
   canDelete?: boolean;
   handleDelete?: () => void;
+  handleSelect?: () => void;
 }
 
-const ImageItem = ({image, canDelete, handleDelete}: ImageItemProps) => {
-  const navigation = useNavigation<StackNavigation>();
-
+const ImageItem = ({
+  image,
+  canDelete,
+  handleSelect,
+  handleDelete,
+}: ImageItemProps) => {
   return (
-    <TouchableOpacity onPress={() => navigation.goBack()}>
+    <TouchableOpacity onPress={handleSelect}>
       <View style={styles.Container}>
         <Image source={image} style={styles.ImageBox} />
         {canDelete && (

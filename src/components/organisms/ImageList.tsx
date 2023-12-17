@@ -8,6 +8,7 @@ interface ImageListProps {
     image: ImageSourcePropType;
     canDelete?: boolean;
     handleDelete?: () => void;
+    handleSelect?: () => void;
   }>;
   listHeaderComponent?: JSX.Element;
 }
@@ -23,6 +24,7 @@ const ImageList = ({data, listHeaderComponent}: ImageListProps) => {
             image={item.image}
             canDelete={item.canDelete}
             handleDelete={item.handleDelete}
+            handleSelect={item.handleSelect}
           />
         )}
         keyExtractor={item => item.id}
