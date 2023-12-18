@@ -10,7 +10,7 @@ import {
 import {COLORS} from '@/constants/colors';
 import {SystemErrorModal, ReqGrantModal} from '@/components/modals';
 import {useRecoilValue} from 'recoil';
-import {poseReferenceState} from '@/recoil/atom/camera';
+import {poseReferenceState, settingPoseValueState} from '@/recoil/atom/camera';
 import Reanimated, {
   Extrapolate,
   interpolate,
@@ -42,6 +42,7 @@ const CameraScreen = ({camera}: CameraScreenProps) => {
   const [deviceType, setDeviceType] = useState<'back' | 'front'>('back');
   const [showReqGrantModal, setShowReqGrantModal] = useState(false);
   const poseReference = useRecoilValue(poseReferenceState);
+  const settingPoseValue = useRecoilValue(settingPoseValueState);
   const isFocussed = useIsFocused();
   const isForeground = useIsForeground();
   const isActive = isFocussed && isForeground;
@@ -156,7 +157,11 @@ const CameraScreen = ({camera}: CameraScreenProps) => {
         <View style={styles.PoseController}>
           <Image
             source={poseReference}
-            style={{width: '100%', height: '100%', resizeMode: 'contain'}}
+            style={{
+              width: `${settingPoseValue.size}%`,
+              height: `${settingPoseValue.size}%`,
+              marginBottom: `${settingPoseValue.height}%`,
+            }}
           />
         </View>
       )}

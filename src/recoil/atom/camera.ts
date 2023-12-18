@@ -10,9 +10,12 @@ export const settingPoseState = atom({
   default: false,
 });
 
-export const poseResizeState = atom<'height' | 'size'>({
-  key: 'poseAdjustHeightState',
-  default: 'height',
+export const settingPoseValueState = atom({
+  key: 'settingPoseValueState',
+  default: {
+    size: 100,
+    height: 0,
+  },
 });
 
 export const poseReferenceState = atom({
