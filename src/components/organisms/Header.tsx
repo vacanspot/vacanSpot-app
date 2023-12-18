@@ -1,5 +1,5 @@
 import React from 'react';
-import {Icon} from '@/components/atom';
+import {PrimaryIcon} from '@/components/atom';
 import {useNavigation} from '@react-navigation/core';
 import {StackNavigation} from 'App';
 import {StyleSheet, Text, View} from 'react-native';
@@ -13,11 +13,10 @@ const Header = () => {
   return (
     <View style={styles.Header}>
       <View style={styles.LogoContainer}>
-        <Icon type="Primary" iconSource={Assets.logo} />
+        <PrimaryIcon iconSource={Assets.logo} />
         <Text style={styles.LogoName}>VACANSPOT</Text>
       </View>
-      <Icon
-        type="Primary"
+      <PrimaryIcon
         iconSource={Assets.setting}
         width={24}
         height={24}

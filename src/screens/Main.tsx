@@ -80,9 +80,6 @@ const styles = StyleSheet.create({
   Bottom: {
     width: '100%',
     height: 180 + getBottomSpace(),
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
     paddingBottom: getBottomSpace(),
     backgroundColor: COLORS.white,
   },

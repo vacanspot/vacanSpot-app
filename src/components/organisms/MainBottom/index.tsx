@@ -1,12 +1,13 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import PhotosButton from './PhotosButton';
 import CaptureButton from './CaptureButton';
+import PhotosButton from './PhotosButton';
+import PoseSetting from './PoseSetting';
 import {Camera} from 'react-native-vision-camera';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigation} from 'App';
 import Assets from 'assets';
-import {Icon} from '@/components/atom';
+import {PrimaryIcon} from '@/components/atom';
 
 interface MainBottomProps {
   camera: React.RefObject<Camera>;
@@ -17,36 +18,47 @@ const MainBottom = ({camera, setIsTakenPhoto}: MainBottomProps) => {
   const navigation = useNavigation<StackNavigation>();
 
   return (
-    <>
-      <View style={styles.Section}>
-        <PhotosButton />
+    <View style={styles.Container}>
+      <View style={styles.SectionContainer}>
+        <View style={styles.Section}>
+          <PhotosButton />
+        </View>
+        <View style={styles.Section}>
+          <CaptureButton camera={camera} setIsTakenPhoto={setIsTakenPhoto} />
+        </View>
+        <View style={styles.Section}>
+          <PrimaryIcon
+            onPress={() => navigation.navigate('Pose')}
+            iconSource={Assets.pose}
+            iconText="포즈"
+          />
+          <PrimaryIcon
+            onPress={() => navigation.navigate('Favorite')}
+            iconSource={Assets.favorite}
+            iconText="MY"
+            width={24}
+            height={24}
+          />
+        </View>
       </View>
-      <View style={styles.Section}>
-        <CaptureButton camera={camera} setIsTakenPhoto={setIsTakenPhoto} />
-      </View>
-      <View style={styles.Section}>
-        <Icon
-          type="Primary"
-          onPress={() => navigation.navigate('Pose')}
-          iconSource={Assets.pose}
-          iconText="포즈"
-        />
-        <Icon
-          type="Primary"
-          onPress={() => navigation.navigate('Favorite')}
-          iconSource={Assets.favorite}
-          iconText="MY"
-          width={24}
-          height={24}
-        />
-      </View>
-    </>
+      <PoseSetting />
+    </View>
   );
 };
 
 export default MainBottom;
 
 const styles = StyleSheet.create({
+  Container: {
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    height: '100%',
+  },
+  SectionContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
   Section: {
     flex: 1,
     height: 100,

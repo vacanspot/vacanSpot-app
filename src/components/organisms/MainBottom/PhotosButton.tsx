@@ -14,7 +14,7 @@ import {
   CameraRoll,
   PhotoIdentifiersPage,
 } from '@react-native-camera-roll/camera-roll';
-import {Icon} from '@/components/atom';
+import {PrimaryIcon} from '@/components/atom';
 import Assets from 'assets';
 
 const PhotosButton = () => {
@@ -72,9 +72,8 @@ const PhotosButton = () => {
               style={styles.photoStyle}
             />
           ) : (
-            <Icon
+            <PrimaryIcon
               onPress={openPhotos}
-              type="Primary"
               iconSource={Assets.photo}
               width={28}
               height={28}

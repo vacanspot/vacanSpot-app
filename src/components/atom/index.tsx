@@ -1,4 +1,5 @@
 import Button from './Button';
-import Icon from './Icon';
+import PrimaryIcon from './PrimaryIcon';
+import TransparentIcon from './TransparentIcon';
 
-export {Button, Icon};
+export {Button, PrimaryIcon, TransparentIcon};
