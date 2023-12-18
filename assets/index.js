@@ -10,6 +10,7 @@ const assets = {
   photo: require('./icons/icon-photo.png'),
   registerImage: require('./icons/icon-register-image.png'),
   cancle: require('./icons/icon-cancel.png'),
+  cancleWhite: require('./icons/icon-cancel-white.png'),
   setting: require('./icons/icon-setting.png'),
   poseSetting: require('./icons/icon-pose-setting.png'),
   poseSettingOn: require('./icons/icon-pose-setting-on.png'),
@@ -17,6 +18,8 @@ const assets = {
   resizeOff: require('./icons/icon-resize-off.png'),
   adjustHeight: require('./icons/icon-adjust-height.png'),
   adjustHeightOff: require('./icons/icon-adjust-height-off.png'),
+  opacity: require('./icons/icon-opacity.png'),
+  opacityOff: require('./icons/icon-opacity-off.png'),
   pose_recommend: [
     require('./pose/2_1.png'),
     require('./pose/3_1.png'),

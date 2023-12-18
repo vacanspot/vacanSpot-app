@@ -3,8 +3,12 @@ import React from 'react';
 import {TransparentIcon} from '@/components/atom';
 import {StyleSheet, View} from 'react-native';
 import Assets from 'assets';
-import {useRecoilState} from 'recoil';
-import {cameraFlashState, settingPoseState} from '@/recoil/atom/camera';
+import {useRecoilState, useSetRecoilState} from 'recoil';
+import {
+  cameraFlashState,
+  poseReferenceState,
+  settingPoseState,
+} from '@/recoil/atom/camera';
 
 interface OptionBoxProps {
   poseReference?: number;
@@ -17,6 +21,7 @@ const OptionBox = ({
   deviceType,
   setDeviceType,
 }: OptionBoxProps) => {
+  const setPoseReference = useSetRecoilState(poseReferenceState);
   const [isOnFlash, setIsOnFlash] = useRecoilState(cameraFlashState);
   const [settingPose, setSettingPose] = useRecoilState(settingPoseState);
 
@@ -41,6 +46,12 @@ const OptionBox = ({
             width={24}
             height={24}
             onPress={() => setSettingPose(!settingPose)}
+          />
+          <TransparentIcon
+            iconSource={Assets.cancleWhite}
+            width={24}
+            height={24}
+            onPress={() => setPoseReference(undefined)}
           />
         </>
       )}

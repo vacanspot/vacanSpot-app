@@ -15,6 +15,7 @@ export const settingPoseValueState = atom({
   default: {
     size: 100,
     height: 0,
+    opacity: 0.5,
   },
 });
 

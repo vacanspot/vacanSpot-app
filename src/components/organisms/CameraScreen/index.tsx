@@ -161,6 +161,7 @@ const CameraScreen = ({camera}: CameraScreenProps) => {
               width: `${settingPoseValue.size}%`,
               height: `${settingPoseValue.size}%`,
               marginBottom: `${settingPoseValue.height}%`,
+              opacity: settingPoseValue.opacity,
             }}
           />
         </View>

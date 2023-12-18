@@ -13,10 +13,17 @@ const settingValue = {
   height: {
     minimumValue: 0,
     maximumValue: 60,
+    step: 5,
   },
   size: {
     minimumValue: 80,
     maximumValue: 140,
+    step: 5,
+  },
+  opacity: {
+    minimumValue: 0.2,
+    maximumValue: 1,
+    step: 0.1,
   },
 };
 
@@ -26,7 +33,9 @@ const PoseSetting = () => {
   const [settingPoseValue, setSettingPoseValue] = useRecoilState(
     settingPoseValueState,
   );
-  const [settingState, setSettingState] = useState<'height' | 'size'>('height');
+  const [settingState, setSettingState] = useState<
+    'height' | 'size' | 'opacity'
+  >('height');
   const slideAnim = useRef(new Animated.Value(HEIGHT)).current;
 
   useEffect(() => {
@@ -61,26 +70,26 @@ const PoseSetting = () => {
           },
         ],
       }}>
-      <View>
-        <Slider
-          minimumValue={settingValue[settingState].minimumValue}
-          maximumValue={settingValue[settingState].maximumValue}
-          style={styles.Slider}
-          thumbStyle={styles.Thumb}
-          thumbSize={32}
-          minimumTrackTintColor={COLORS.main}
-          maximumTrackTintColor={COLORS.whiteSmoke}
-          trackHeight={4}
-          value={settingPoseValue[settingState]}
-          onValueChange={value =>
-            setSettingPoseValue(prev => {
-              return {...prev, [settingState]: value};
-            })
-          }
-          step={5}
-          enabled={true}
-          slideOnTap={true}
-        />
+      <Slider
+        minimumValue={settingValue[settingState].minimumValue}
+        maximumValue={settingValue[settingState].maximumValue}
+        style={styles.Slider}
+        thumbStyle={styles.Thumb}
+        thumbSize={32}
+        minimumTrackTintColor={COLORS.main}
+        maximumTrackTintColor={COLORS.whiteSmoke}
+        trackHeight={4}
+        value={settingPoseValue[settingState]}
+        onValueChange={value =>
+          setSettingPoseValue(prev => {
+            return {...prev, [settingState]: value};
+          })
+        }
+        step={settingValue[settingState].step}
+        enabled={true}
+        slideOnTap={true}
+      />
+      <>
         <View style={styles.SectionContainer}>
           <View style={styles.Section}>
             <PrimaryIcon
@@ -104,8 +113,18 @@ const PoseSetting = () => {
               }
             />
           </View>
+          <View style={styles.Section}>
+            <PrimaryIcon
+              iconText="투명도"
+              isActive={settingState === 'opacity'}
+              onPress={() => setSettingState('opacity')}
+              iconSource={
+                settingState === 'opacity' ? Assets.opacity : Assets.opacityOff
+              }
+            />
+          </View>
         </View>
-      </View>
+      </>
     </Animated.View>
   );
 };
