@@ -51,7 +51,7 @@ const Favorite = () => {
         data={userSavedImageList.map(item => {
           return {
             id: `${item._id}`,
-            uri: item.path,
+            image: {uri: item.path},
             canDelete: true,
             handleDelete: () => deletePose(item),
           };
