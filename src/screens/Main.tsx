@@ -82,5 +82,6 @@ const styles = StyleSheet.create({
     height: 180 + getBottomSpace(),
     paddingBottom: getBottomSpace(),
     backgroundColor: COLORS.white,
+    zIndex: 1,
   },
 });

@@ -8,6 +8,7 @@ import {settingPoseState, settingPoseValueState} from '@/recoil/atom/camera';
 import {useEffect, useRef} from 'react';
 import Assets from 'assets';
 import {PrimaryIcon} from '@/components/atom';
+import {getBottomSpace} from 'react-native-iphone-screen-helper';
 
 const settingValue = {
   height: {
@@ -51,7 +52,7 @@ const PoseSetting = () => {
     if (!settingPose) {
       Animated.parallel([
         Animated.timing(slideAnim, {
-          toValue: HEIGHT,
+          toValue: HEIGHT + getBottomSpace(),
           duration: 300,
           useNativeDriver: false,
         }),
