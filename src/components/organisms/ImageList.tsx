@@ -1,15 +1,14 @@
 import {ImageItem} from '@/components/molecules';
+import {ImageItemProps} from '@/components/molecules/ImageItem';
 import React from 'react';
-import {StyleSheet, View, FlatList, ImageSourcePropType} from 'react-native';
+import {StyleSheet, View, FlatList} from 'react-native';
 
 interface ImageListProps {
-  data?: Array<{
-    id: string;
-    image: ImageSourcePropType;
-    canDelete?: boolean;
-    handleDelete?: () => void;
-    handleSelect?: () => void;
-  }>;
+  data?: Array<
+    {
+      id: string;
+    } & ImageItemProps
+  >;
   listHeaderComponent?: JSX.Element;
 }
 
@@ -19,14 +18,17 @@ const ImageList = ({data, listHeaderComponent}: ImageListProps) => {
       <FlatList
         ListHeaderComponent={listHeaderComponent}
         data={data}
-        renderItem={({item}) => (
-          <ImageItem
-            image={item.image}
-            canDelete={item.canDelete}
-            handleDelete={item.handleDelete}
-            handleSelect={item.handleSelect}
-          />
-        )}
+        renderItem={({item}) => {
+          return (
+            <ImageItem
+              image={item.image}
+              isFavorite={item.isFavorite}
+              handleDelete={item.handleDelete}
+              handleSelect={item.handleSelect}
+              handleFavorite={item.handleFavorite}
+            />
+          );
+        }}
         keyExtractor={item => item.id}
         horizontal={false}
         contentContainerStyle={styles.ContentContainer}

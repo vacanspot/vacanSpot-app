@@ -156,8 +156,13 @@ const CameraScreen = ({camera}: CameraScreenProps) => {
       {poseReference && (
         <View style={styles.PoseController}>
           <Image
-            source={poseReference}
+            source={
+              typeof poseReference === 'number'
+                ? poseReference
+                : {uri: poseReference}
+            }
             style={{
+              ...styles.PoseReference,
               width: `${settingPoseValue.size}%`,
               height: `${settingPoseValue.size}%`,
               marginBottom: `${settingPoseValue.height}%`,
@@ -191,5 +196,8 @@ const styles = StyleSheet.create({
     zIndex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  PoseReference: {
+    resizeMode: 'contain',
   },
 });

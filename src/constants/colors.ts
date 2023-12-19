@@ -1,6 +1,6 @@
 export const COLORS = {
   background: '#FFF1D9',
-  painBeige: '#FEF4E3',
+  painBeige: '#9c8481',
   main: '#F7353F',
   white: '#FFFFFF',
   black: '#000000',

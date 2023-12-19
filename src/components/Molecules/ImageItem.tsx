@@ -10,16 +10,18 @@ import {
 import Assets from 'assets';
 import {COLORS} from '@/constants/colors';
 
-interface ImageItemProps {
+export interface ImageItemProps {
   image: ImageSourcePropType;
-  canDelete?: boolean;
+  isFavorite?: boolean;
+  handleFavorite?: () => void;
   handleDelete?: () => void;
   handleSelect?: () => void;
 }
 
 const ImageItem = ({
   image,
-  canDelete,
+  isFavorite,
+  handleFavorite,
   handleSelect,
   handleDelete,
 }: ImageItemProps) => {
@@ -27,11 +29,17 @@ const ImageItem = ({
     <TouchableOpacity onPress={handleSelect}>
       <View style={styles.Container}>
         <Image source={image} style={styles.ImageBox} />
-        {canDelete && (
-          <TouchableOpacity
-            style={styles.CancelIconWrapper}
-            onPress={handleDelete}>
-            <Image source={Assets.cancle} style={styles.CancelIcon} />
+        {handleDelete && (
+          <TouchableOpacity style={styles.IconWrapper} onPress={handleDelete}>
+            <Image source={Assets.cancle} style={styles.Icon} />
+          </TouchableOpacity>
+        )}
+        {handleFavorite && (
+          <TouchableOpacity style={styles.IconWrapper} onPress={handleFavorite}>
+            <Image
+              source={isFavorite ? Assets.star : Assets.starOff}
+              style={styles.Icon}
+            />
           </TouchableOpacity>
         )}
       </View>
@@ -45,22 +53,24 @@ const styles = StyleSheet.create({
   Container: {
     width: (Dimensions.get('screen').width - 1 * 4) / 3,
     height: (Dimensions.get('screen').width - 1 * 4) / 3,
-    backgroundColor: COLORS.black,
+    backgroundColor: COLORS.painBeige,
   },
   ImageBox: {
     width: '100%',
     height: '100%',
   },
-  CancelIconWrapper: {
+  IconWrapper: {
     position: 'absolute',
-    right: -8,
-    top: 4,
+    right: 0,
+    top: 0,
     width: 44,
     height: 44,
     zIndex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  CancelIcon: {
-    width: 32,
-    height: 32,
+  Icon: {
+    width: 28,
+    height: 28,
   },
 });

@@ -11,7 +11,7 @@ import {
 } from '@/recoil/atom/camera';
 
 interface OptionBoxProps {
-  poseReference?: number;
+  poseReference?: number | string;
   deviceType: 'back' | 'front';
   setDeviceType: React.Dispatch<React.SetStateAction<'back' | 'front'>>;
 }
@@ -51,7 +51,10 @@ const OptionBox = ({
             iconSource={Assets.cancleWhite}
             width={24}
             height={24}
-            onPress={() => setPoseReference(undefined)}
+            onPress={() => {
+              setSettingPose(false);
+              setPoseReference(undefined);
+            }}
           />
         </>
       )}

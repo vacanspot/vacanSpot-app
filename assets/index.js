@@ -20,6 +20,8 @@ const assets = {
   adjustHeightOff: require('./icons/icon-adjust-height-off.png'),
   opacity: require('./icons/icon-opacity.png'),
   opacityOff: require('./icons/icon-opacity-off.png'),
+  star: require('./icons/icon-star.png'),
+  starOff: require('./icons/icon-star-off.png'),
   pose_recommend: [
     require('./pose/2_1.png'),
     require('./pose/3_1.png'),

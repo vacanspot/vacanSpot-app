@@ -19,7 +19,7 @@ export const settingPoseValueState = atom({
   },
 });
 
-export const poseReferenceState = atom({
+export const poseReferenceState = atom<number | string | undefined>({
   key: 'poseReferenceState',
   default: undefined,
 });
