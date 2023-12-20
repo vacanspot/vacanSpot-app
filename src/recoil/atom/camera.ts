@@ -1,5 +1,10 @@
 import {atom} from 'recoil';
 
+export const takePhotoState = atom({
+  key: 'takePhotoState',
+  default: false,
+});
+
 export const cameraFlashState = atom({
   key: 'cameraFlashState',
   default: false,

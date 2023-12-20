@@ -4,16 +4,17 @@ import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Camera} from 'react-native-vision-camera';
 import {CameraRoll} from '@react-native-camera-roll/camera-roll';
 import {ReqGrantModal} from '@/components/modals';
-import {useRecoilValue} from 'recoil';
-import {cameraFlashState} from '@/recoil/atom/camera';
+import {useRecoilValue, useSetRecoilState} from 'recoil';
+import {cameraFlashState, takePhotoState} from '@/recoil/atom/camera';
 
 interface CaptureButtonProps {
   camera: React.RefObject<Camera>;
-  setIsTakenPhoto: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const CaptureButton = ({camera, setIsTakenPhoto}: CaptureButtonProps) => {
+const CaptureButton = ({camera}: CaptureButtonProps) => {
   const [failToSavePhoto, setFailToSavePhoto] = useState(false);
+
+  const setIsTakenPhoto = useSetRecoilState(takePhotoState);
   const isOnFlash = useRecoilValue(cameraFlashState);
 
   const takePhoto = () => {

@@ -16,8 +16,11 @@ import {
 } from '@react-native-camera-roll/camera-roll';
 import {PrimaryIcon} from '@/components/atom';
 import Assets from 'assets';
+import {useRecoilValue} from 'recoil';
+import {takePhotoState} from '@/recoil/atom/camera';
 
 const PhotosButton = () => {
+  const isTakenPhoto = useRecoilValue(takePhotoState);
   const [showDisableAccessPhotos, setShowDisableAccessPhotos] = useState(true);
   const [reqAccessPhoto, setReqAccessPhoto] = useState(false);
   const [firstPhoto, setFirstPhoto] = useState<PhotoIdentifiersPage | null>(
@@ -36,7 +39,7 @@ const PhotosButton = () => {
           setShowDisableAccessPhotos(false);
         }
       });
-  }, []);
+  }, [isTakenPhoto]);
 
   const openPhotos = () => {
     if (!showDisableAccessPhotos) {

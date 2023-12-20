@@ -1,104 +1,21 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {useEffect, useState} from 'react';
-import {Dimensions, Image, Platform, StyleSheet, View} from 'react-native';
-import {
-  Camera,
-  useCameraDevice,
-  useCameraFormat,
-  useCameraPermission,
-} from 'react-native-vision-camera';
+import {Animated, StyleSheet, View} from 'react-native';
+import {useCameraPermission} from 'react-native-vision-camera';
 import {COLORS} from '@/constants/colors';
-import {SystemErrorModal, ReqGrantModal} from '@/components/modals';
-import {useRecoilValue} from 'recoil';
-import {poseReferenceState, settingPoseValueState} from '@/recoil/atom/camera';
-import Reanimated, {
-  Extrapolate,
-  interpolate,
-  useAnimatedGestureHandler,
-  useAnimatedProps,
-  useSharedValue,
-} from 'react-native-reanimated';
-import {
-  GestureHandlerRootView,
-  PinchGestureHandler,
-  PinchGestureHandlerGestureEvent,
-  TapGestureHandler,
-} from 'react-native-gesture-handler';
-import {useIsFocused} from '@react-navigation/core';
-import {useIsForeground} from '@/hook/useIsForeground';
-import {getBottomSpace} from 'react-native-iphone-screen-helper';
+import {ReqGrantModal} from '@/components/modals';
+import {useRecoilState} from 'recoil';
+import {takePhotoState} from '@/recoil/atom/camera';
 import OptionBox from '@/components/organisms/CameraScreen/OptionBox';
+import CameraHandler from '@/components/organisms/CameraScreen/CameraHandler';
+import {CameraProps} from '@/screens/Main';
 
-interface CameraScreenProps {
-  camera: React.RefObject<Camera>;
-}
-
-const ReanimatedCamera = Reanimated.createAnimatedComponent(Camera);
-Reanimated.addWhitelistedNativeProps({
-  zoom: true,
-});
-
-const CameraScreen = ({camera}: CameraScreenProps) => {
+const CameraScreen = ({camera}: CameraProps) => {
+  const {hasPermission, requestPermission} = useCameraPermission();
   const [deviceType, setDeviceType] = useState<'back' | 'front'>('back');
   const [showReqGrantModal, setShowReqGrantModal] = useState(false);
-  const poseReference = useRecoilValue(poseReferenceState);
-  const settingPoseValue = useRecoilValue(settingPoseValueState);
-  const isFocussed = useIsFocused();
-  const isForeground = useIsForeground();
-  const isActive = isFocussed && isForeground;
-
-  const {hasPermission, requestPermission} = useCameraPermission();
-  const device = useCameraDevice(deviceType);
-  const zoom = useSharedValue(0);
-  const minZoom = device?.minZoom ?? 1;
-  const maxZoom = Math.min(device?.maxZoom ?? 1, 5);
-  const neutralZoom = device?.neutralZoom ?? 1;
-  const SCREEN_HEIGHT = Platform.select<number>({
-    android: Dimensions.get('screen').height - getBottomSpace(),
-    ios: Dimensions.get('window').height,
-  }) as number;
-  const screenAspectRatio = SCREEN_HEIGHT / Dimensions.get('window').width;
-
-  const format = useCameraFormat(device, [
-    {fps: 60},
-    {photoAspectRatio: screenAspectRatio},
-    {photoResolution: 'max'},
-  ]);
-
-  const cameraAnimatedProps = useAnimatedProps(() => {
-    const z = Math.max(Math.min(zoom.value, maxZoom), minZoom);
-    return {
-      zoom: z,
-    };
-  }, [maxZoom, minZoom, zoom]);
-
-  const onPinchGesture = useAnimatedGestureHandler<
-    PinchGestureHandlerGestureEvent,
-    {startZoom?: number}
-  >({
-    onStart: (_, context) => {
-      context.startZoom = zoom.value;
-    },
-    onActive: (event, context) => {
-      const startZoom = context.startZoom ?? 0;
-      const scale = interpolate(
-        event.scale,
-        [1 - 1 / 3, 1, 3],
-        [-1, 0, 1],
-        Extrapolate.CLAMP,
-      );
-      zoom.value = interpolate(
-        scale,
-        [-1, 0, 1],
-        [minZoom, startZoom, maxZoom],
-        Extrapolate.CLAMP,
-      );
-    },
-  });
-
-  useEffect(() => {
-    zoom.value = neutralZoom;
-  }, [neutralZoom, zoom]);
+  const [isTakenPhoto, setIsTakenPhoto] = useRecoilState(takePhotoState);
+  const colorAnim = useMemo(() => new Animated.Value(0), []); // 초기 배경색 애니메이션 값
 
   useEffect(() => {
     if (!hasPermission) {
@@ -108,13 +25,30 @@ const CameraScreen = ({camera}: CameraScreenProps) => {
     }
   }, [hasPermission, requestPermission]);
 
-  if (!device) {
-    return (
-      <View style={styles.Wrapper}>
-        <SystemErrorModal text="카메라 정보를 가져올 수 없습니다." />
-      </View>
-    );
-  }
+  useEffect(() => {
+    if (isTakenPhoto) {
+      // 화면 깜빡임 효과 (배경색 변경)
+      Animated.timing(colorAnim, {
+        toValue: 1, // 목표 애니메이션 값
+        duration: 140, // 애니메이션 지속 시간 (짧게 설정)
+        useNativeDriver: false,
+      }).start(() => {
+        // 애니메이션 완료 후 다시 원래 상태로
+        Animated.timing(colorAnim, {
+          toValue: 0, // 원래 애니메이션 값으로
+          duration: 140, // 애니메이션 지속 시간 (짧게 설정)
+          useNativeDriver: false,
+        }).start(() => {
+          setIsTakenPhoto(false);
+        });
+      });
+    }
+  }, [colorAnim, isTakenPhoto, setIsTakenPhoto]);
+
+  const backgroundColor = colorAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['rgba(0, 0, 0, 0)', 'rgba(255, 255, 255, 0.7)'], // 투명에서 검은색으로
+  });
 
   if (showReqGrantModal) {
     return (
@@ -130,47 +64,9 @@ const CameraScreen = ({camera}: CameraScreenProps) => {
 
   return (
     <>
-      <GestureHandlerRootView style={styles.Camera}>
-        <PinchGestureHandler onGestureEvent={onPinchGesture} enabled={isActive}>
-          <Reanimated.View style={StyleSheet.absoluteFill}>
-            <TapGestureHandler numberOfTaps={2}>
-              <ReanimatedCamera
-                ref={camera}
-                style={styles.Camera}
-                device={device}
-                format={format}
-                isActive={isActive}
-                enableZoomGesture={false}
-                animatedProps={cameraAnimatedProps}
-                photo
-              />
-            </TapGestureHandler>
-          </Reanimated.View>
-        </PinchGestureHandler>
-      </GestureHandlerRootView>
-      <OptionBox
-        poseReference={poseReference}
-        deviceType={deviceType}
-        setDeviceType={setDeviceType}
-      />
-      {poseReference && (
-        <View style={styles.PoseController}>
-          <Image
-            source={
-              typeof poseReference === 'number'
-                ? poseReference
-                : {uri: poseReference}
-            }
-            style={{
-              ...styles.PoseReference,
-              width: `${settingPoseValue.size}%`,
-              height: `${settingPoseValue.size}%`,
-              marginBottom: `${settingPoseValue.height}%`,
-              opacity: settingPoseValue.opacity,
-            }}
-          />
-        </View>
-      )}
+      <Animated.View style={{...styles.AnimationView, backgroundColor}} />
+      <CameraHandler camera={camera} deviceType={deviceType} />
+      <OptionBox deviceType={deviceType} setDeviceType={setDeviceType} />
     </>
   );
 };
@@ -183,21 +79,13 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: COLORS.black,
   },
-  Camera: {
-    width: '100%',
-    height: '100%',
-  },
-  PoseController: {
+  AnimationView: {
     position: 'absolute',
-    width: '100%',
-    height: '100%',
     top: 0,
     left: 0,
+    width: '100%',
+    height: '100%',
     zIndex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  PoseReference: {
-    resizeMode: 'contain',
+    pointerEvents: 'none',
   },
 });

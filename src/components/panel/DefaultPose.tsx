@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 
 import {COLORS} from '@/constants/colors';
@@ -36,9 +36,7 @@ const DefaultPose = ({onlyFavorite = false}: DefaultPoseProps) => {
   }, []);
 
   useEffect(() => {
-    console.log('s');
     return () => {
-      console.log('e');
       realm.write(() => {
         realm.deleteAll();
         for (const [key, value] of newFavoriteList) {

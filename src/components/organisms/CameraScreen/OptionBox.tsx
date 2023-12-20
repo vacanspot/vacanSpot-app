@@ -3,7 +3,7 @@ import React from 'react';
 import {TransparentIcon} from '@/components/atom';
 import {StyleSheet, View} from 'react-native';
 import Assets from 'assets';
-import {useRecoilState, useSetRecoilState} from 'recoil';
+import {useRecoilState} from 'recoil';
 import {
   cameraFlashState,
   poseReferenceState,
@@ -11,17 +11,12 @@ import {
 } from '@/recoil/atom/camera';
 
 interface OptionBoxProps {
-  poseReference?: number | string;
   deviceType: 'back' | 'front';
   setDeviceType: React.Dispatch<React.SetStateAction<'back' | 'front'>>;
 }
 
-const OptionBox = ({
-  poseReference,
-  deviceType,
-  setDeviceType,
-}: OptionBoxProps) => {
-  const setPoseReference = useSetRecoilState(poseReferenceState);
+const OptionBox = ({deviceType, setDeviceType}: OptionBoxProps) => {
+  const [poseReference, setPoseReference] = useRecoilState(poseReferenceState);
   const [isOnFlash, setIsOnFlash] = useRecoilState(cameraFlashState);
   const [settingPose, setSettingPose] = useRecoilState(settingPoseState);
 
