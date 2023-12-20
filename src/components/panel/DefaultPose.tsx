@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 
 import {COLORS} from '@/constants/colors';
@@ -11,7 +11,11 @@ import {poseReferenceState} from '@/recoil/atom/camera';
 import {useQuery, useRealm} from '@realm/react';
 import ImageSchema from '@/model/ImageSchema';
 
-const DefaultPose = () => {
+interface DefaultPoseProps {
+  onlyFavorite?: boolean;
+}
+
+const DefaultPose = ({onlyFavorite = false}: DefaultPoseProps) => {
   const realm = useRealm();
   const readFavorite = useQuery(ImageSchema);
   const navigation = useNavigation<StackNavigation>();
@@ -29,8 +33,12 @@ const DefaultPose = () => {
 
   useEffect(() => {
     setNewFavoriteList(favoriteList);
+  }, []);
 
+  useEffect(() => {
+    console.log('s');
     return () => {
+      console.log('e');
       realm.write(() => {
         realm.deleteAll();
         for (const [key, value] of newFavoriteList) {
@@ -43,31 +51,35 @@ const DefaultPose = () => {
         }
       });
     };
-  }, []);
+  }, [newFavoriteList]);
 
   return (
     <View style={styles.Container}>
       <ImageList
-        data={Assets.pose_recommend?.map((item, index) => {
-          const isFavorite = newFavoriteList.get(item);
-          return {
-            id: `${index}_${Math.random().toString(16).substring(2, 11)}`,
-            isFavorite,
-            image: item,
-            canFavorite: true,
-            handleFavorite: () => {
-              if (isFavorite) {
-                setNewFavoriteList(prev => new Map([...prev, [item, false]]));
-              } else {
-                setNewFavoriteList(prev => new Map([...prev, [item, true]]));
-              }
-            },
-            handleSelect: () => {
-              setPoseReference(item);
-              navigation.navigate('Main');
-            },
-          };
-        })}
+        data={Assets.pose_recommend
+          ?.map((item, index) => {
+            const isFavorite = newFavoriteList.get(item);
+            return {
+              id: `${index}_${Math.random().toString(16).substring(2, 11)}`,
+              isFavorite,
+              image: item,
+              canFavorite: true,
+              handleFavorite: () => {
+                if (isFavorite) {
+                  setNewFavoriteList(prev => new Map([...prev, [item, false]]));
+                } else {
+                  setNewFavoriteList(prev => new Map([...prev, [item, true]]));
+                }
+              },
+              handleSelect: () => {
+                setPoseReference(item);
+                navigation.navigate('Main');
+              },
+            };
+          })
+          .filter(item => {
+            return onlyFavorite ? item.isFavorite : item;
+          })}
       />
     </View>
   );

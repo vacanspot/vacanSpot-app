@@ -42,6 +42,7 @@ export default ImageList;
 const styles = StyleSheet.create({
   Container: {
     paddingTop: 16,
+    height: '100%',
   },
   ContentContainer: {
     flexDirection: 'row',
