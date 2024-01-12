@@ -1,27 +1,17 @@
 import React from 'react';
 import {PrimaryIcon} from '@/components/atom';
-import {useNavigation} from '@react-navigation/core';
-import {StackNavigation} from 'App';
 import {StyleSheet, Text, View} from 'react-native';
 import Assets from 'assets';
 import {COLORS} from '@/constants/colors';
 import {getStatusBarHeight} from 'react-native-iphone-screen-helper';
 
 const Header = () => {
-  const navigation = useNavigation<StackNavigation>();
-
   return (
     <View style={styles.Header}>
       <View style={styles.LogoContainer}>
         <PrimaryIcon iconSource={Assets.logo} />
         <Text style={styles.LogoName}>VACANSPOT</Text>
       </View>
-      <PrimaryIcon
-        iconSource={Assets.setting}
-        width={24}
-        height={24}
-        onPress={() => navigation.navigate('Setting')}
-      />
     </View>
   );
 };

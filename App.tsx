@@ -53,11 +53,6 @@ const App = () => {
               component={Favorite}
               options={{...HeaderDefaultOption, headerTitle: 'MY'}}
             />
-            <Stack.Screen
-              name="Setting"
-              component={Favorite}
-              options={{...HeaderDefaultOption, headerTitle: '서비스 정보'}}
-            />
           </Stack.Navigator>
         </NavigationContainer>
       </RecoilRoot>
