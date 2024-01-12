@@ -1,7 +1,8 @@
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect, useRef} from 'react';
 import {ReqGrantModal} from '@/components/modals';
 import {useState} from 'react';
 import {
+  AppState,
   Image,
   Linking,
   Platform,
@@ -20,26 +21,13 @@ import {useRecoilValue} from 'recoil';
 import {takePhotoState} from '@/recoil/atom/camera';
 
 const PhotosButton = () => {
+  const appState = useRef(AppState.currentState);
   const isTakenPhoto = useRecoilValue(takePhotoState);
   const [showDisableAccessPhotos, setShowDisableAccessPhotos] = useState(true);
   const [reqAccessPhoto, setReqAccessPhoto] = useState(false);
   const [firstPhoto, setFirstPhoto] = useState<PhotoIdentifiersPage | null>(
     null,
   );
-
-  useEffect(() => {
-    CameraRoll.getPhotos({
-      first: 1,
-    })
-      .then(data => {
-        setFirstPhoto(data);
-      })
-      .catch(err => {
-        if (err.code === 'E_PHOTO_LIBRARY_AUTH_DENIED') {
-          setShowDisableAccessPhotos(false);
-        }
-      });
-  }, [isTakenPhoto]);
 
   const openPhotos = () => {
     if (!showDisableAccessPhotos) {
@@ -57,6 +45,41 @@ const PhotosButton = () => {
       }
     }
   };
+
+  const readFirstPhoto = useCallback(() => {
+    CameraRoll.getPhotos({
+      first: 1,
+    })
+      .then(data => {
+        setFirstPhoto(data);
+      })
+      .catch(err => {
+        if (err.code === 'E_PHOTO_LIBRARY_AUTH_DENIED') {
+          setShowDisableAccessPhotos(false);
+        }
+      });
+  }, []);
+
+  useEffect(() => {
+    readFirstPhoto();
+  }, [isTakenPhoto, readFirstPhoto]);
+
+  useEffect(() => {
+    const subscription = AppState.addEventListener('change', nextAppState => {
+      if (
+        appState.current.match(/inactive|background/) &&
+        nextAppState === 'active'
+      ) {
+        readFirstPhoto();
+      }
+
+      appState.current = nextAppState;
+    });
+
+    return () => {
+      subscription.remove();
+    };
+  }, []);
 
   return (
     <>
