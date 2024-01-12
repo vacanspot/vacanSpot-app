@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: (Dimensions.get('screen').width - 1 * 4) / 3,
     height: (Dimensions.get('screen').width - 1 * 4) / 3,
-    backgroundColor: COLORS.painBeige,
+    backgroundColor: COLORS.dark,
   },
   AddPoseIcon: {
     width: 44,

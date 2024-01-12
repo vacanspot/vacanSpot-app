@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   Container: {
     width: (Dimensions.get('screen').width - 1 * 4) / 3,
     height: (Dimensions.get('screen').width - 1 * 4) / 3,
-    backgroundColor: COLORS.painBeige,
+    backgroundColor: COLORS.dark,
   },
   ImageBox: {
     width: '100%',
