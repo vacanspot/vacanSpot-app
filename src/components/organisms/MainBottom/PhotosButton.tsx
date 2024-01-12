@@ -1,8 +1,9 @@
-import React, {useCallback, useEffect, useRef} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {ReqGrantModal} from '@/components/modals';
 import {useState} from 'react';
 import {
   AppState,
+  AppStateStatus,
   Image,
   Linking,
   Platform,
@@ -21,7 +22,6 @@ import {useRecoilValue} from 'recoil';
 import {takePhotoState} from '@/recoil/atom/camera';
 
 const PhotosButton = () => {
-  const appState = useRef(AppState.currentState);
   const isTakenPhoto = useRecoilValue(takePhotoState);
   const [showDisableAccessPhotos, setShowDisableAccessPhotos] = useState(true);
   const [reqAccessPhoto, setReqAccessPhoto] = useState(false);
@@ -65,21 +65,18 @@ const PhotosButton = () => {
   }, [isTakenPhoto, readFirstPhoto]);
 
   useEffect(() => {
-    const subscription = AppState.addEventListener('change', nextAppState => {
-      if (
-        appState.current.match(/inactive|background/) &&
-        nextAppState === 'active'
-      ) {
+    const onChange = (nextAppState: AppStateStatus) => {
+      if (nextAppState === 'active') {
         readFirstPhoto();
       }
+    };
 
-      appState.current = nextAppState;
-    });
+    const subscription = AppState.addEventListener('change', onChange);
 
     return () => {
       subscription.remove();
     };
-  }, []);
+  }, [readFirstPhoto]);
 
   return (
     <>
