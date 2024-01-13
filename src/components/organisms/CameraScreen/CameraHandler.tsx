@@ -124,6 +124,7 @@ const CameraHandler = ({
               enableZoomGesture={false}
               animatedProps={cameraAnimatedProps}
               photo
+              enableHighQualityPhotos
             />
           </TapGestureHandler>
           <PoseReference />

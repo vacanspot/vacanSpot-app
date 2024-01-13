@@ -41,7 +41,8 @@ export default ImageList;
 
 const styles = StyleSheet.create({
   Container: {
-    paddingTop: 16,
+    paddingTop: 2,
+    paddingLeft: 1,
     height: '100%',
   },
   ContentContainer: {
