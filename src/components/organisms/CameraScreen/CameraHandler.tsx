@@ -14,7 +14,6 @@ import Reanimated, {
   useSharedValue,
 } from 'react-native-reanimated';
 import PoseReference from '@/components/organisms/CameraScreen/PoseReference';
-import {useRecoilValue} from 'recoil';
 import {useIsFocused} from '@react-navigation/core';
 import {useIsForeground} from '@/hook/useIsForeground';
 import {
@@ -22,11 +21,10 @@ import {
   useCameraDevice,
   useCameraFormat,
 } from 'react-native-vision-camera';
-import {poseReferenceState} from '@/recoil/atom/camera';
 import {SystemErrorModal} from '@/components/modals';
 import {COLORS} from '@/constants/colors';
-import {getBottomSpace} from 'react-native-iphone-screen-helper';
 import {CameraProps} from '@/screens/Main';
+import {BottomHeight, HeaderHeight} from '@/constants/layout';
 
 interface CameraHandlerProps {
   deviceType: 'back' | 'front';
@@ -41,7 +39,6 @@ const CameraHandler = ({
   camera,
   deviceType,
 }: CameraHandlerProps & CameraProps) => {
-  const poseReference = useRecoilValue(poseReferenceState);
   const device = useCameraDevice(deviceType);
 
   const isFocussed = useIsFocused();
@@ -53,16 +50,22 @@ const CameraHandler = ({
   const maxZoom = Math.min(device?.maxZoom ?? 1, 5);
   const neutralZoom = device?.neutralZoom ?? 1;
 
+  const layoutHeight = HeaderHeight + BottomHeight; // Header, Bottom 영역 높이
   const SCREEN_HEIGHT = Platform.select<number>({
-    android: Dimensions.get('screen').height - getBottomSpace(),
-    ios: Dimensions.get('window').height,
+    android: Dimensions.get('screen').height - layoutHeight,
+    ios: Dimensions.get('window').height - layoutHeight,
   }) as number;
-  const screenAspectRatio = SCREEN_HEIGHT / Dimensions.get('window').width;
+  const SCREEN_WIDTH = Dimensions.get('window').width;
 
   const format = useCameraFormat(device, [
-    {fps: 60},
-    {photoAspectRatio: screenAspectRatio},
-    {photoResolution: 'max'},
+    {photoAspectRatio: SCREEN_HEIGHT / SCREEN_WIDTH}, // 카메라 비율
+    {
+      photoResolution: {
+        // 카메라 영역 높이와 너비
+        width: SCREEN_WIDTH,
+        height: SCREEN_HEIGHT,
+      },
+    },
   ]);
 
   const cameraAnimatedProps = useAnimatedProps(() => {
@@ -123,7 +126,7 @@ const CameraHandler = ({
               photo
             />
           </TapGestureHandler>
-          {poseReference && <PoseReference poseReference={poseReference} />}
+          <PoseReference />
         </Reanimated.View>
       </PinchGestureHandler>
     </GestureHandlerRootView>

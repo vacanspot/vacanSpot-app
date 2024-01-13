@@ -4,6 +4,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import Assets from 'assets';
 import {COLORS} from '@/constants/colors';
 import {getStatusBarHeight} from 'react-native-iphone-screen-helper';
+import {HeaderHeight} from '@/constants/layout';
 
 const Header = () => {
   return (
@@ -21,6 +22,7 @@ export default Header;
 const styles = StyleSheet.create({
   Header: {
     width: '100%',
+    height: HeaderHeight,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',

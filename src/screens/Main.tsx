@@ -1,13 +1,10 @@
 import React, {useRef} from 'react';
 import {COLORS} from '@/constants/colors';
 import {Dimensions, StyleSheet, View} from 'react-native';
-import {
-  getBottomSpace,
-  getStatusBarHeight,
-} from 'react-native-iphone-screen-helper';
 import {CameraScreen, MainBottom} from '@/components/organisms';
 import {Camera} from 'react-native-vision-camera';
 import Header from '@/components/organisms/Header';
+import {BottomHeight, HeaderHeight} from '@/constants/layout';
 
 export interface CameraProps {
   camera: React.RefObject<Camera>;
@@ -38,16 +35,11 @@ const styles = StyleSheet.create({
   },
   CameraArea: {
     width: '100%',
-    height:
-      Dimensions.get('window').height -
-      getStatusBarHeight() -
-      getBottomSpace() -
-      220,
+    height: Dimensions.get('window').height - HeaderHeight - BottomHeight,
   },
   Bottom: {
     width: '100%',
-    height: 180 + getBottomSpace(),
-    paddingBottom: getBottomSpace(),
+    height: BottomHeight,
     backgroundColor: COLORS.white,
     zIndex: 1,
   },

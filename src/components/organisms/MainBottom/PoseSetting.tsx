@@ -8,7 +8,7 @@ import {settingPoseState, settingPoseValueState} from '@/recoil/atom/camera';
 import {useEffect, useRef} from 'react';
 import Assets from 'assets';
 import {PrimaryIcon} from '@/components/atom';
-import {getBottomSpace} from 'react-native-iphone-screen-helper';
+import {BottomHeight} from '@/constants/layout';
 
 const settingValue = {
   height: {
@@ -29,7 +29,6 @@ const settingValue = {
 };
 
 const PoseSetting = () => {
-  const HEIGHT = 180;
   const settingPose = useRecoilValue(settingPoseState);
   const [settingPoseValue, setSettingPoseValue] = useRecoilState(
     settingPoseValueState,
@@ -37,7 +36,7 @@ const PoseSetting = () => {
   const [settingState, setSettingState] = useState<
     'height' | 'size' | 'opacity'
   >('height');
-  const slideAnim = useRef(new Animated.Value(HEIGHT)).current;
+  const slideAnim = useRef(new Animated.Value(BottomHeight)).current;
 
   useEffect(() => {
     if (settingPose) {
@@ -52,19 +51,19 @@ const PoseSetting = () => {
     if (!settingPose) {
       Animated.parallel([
         Animated.timing(slideAnim, {
-          toValue: HEIGHT + getBottomSpace(),
+          toValue: BottomHeight,
           duration: 300,
           useNativeDriver: false,
         }),
       ]).start();
     }
-  }, [settingPose, HEIGHT, slideAnim]);
+  }, [settingPose, slideAnim]);
 
   return (
     <Animated.View
       style={{
         ...styles.SlideUpContainer,
-        height: HEIGHT,
+        height: BottomHeight,
         transform: [
           {
             translateY: slideAnim,
