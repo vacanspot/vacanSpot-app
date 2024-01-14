@@ -9,6 +9,7 @@ import {takePhotoState} from '@/recoil/atom/camera';
 import OptionBox from '@/components/organisms/CameraScreen/OptionBox';
 import CameraHandler from '@/components/organisms/CameraScreen/CameraHandler';
 import {CameraProps} from '@/screens/Main';
+import CameraTest from '@/components/organisms/CameraScreen/CameraTest';
 
 const CameraScreen = ({camera}: CameraProps) => {
   const {hasPermission, requestPermission} = useCameraPermission();
@@ -65,7 +66,8 @@ const CameraScreen = ({camera}: CameraProps) => {
   return (
     <>
       <Animated.View style={{...styles.AnimationView, backgroundColor}} />
-      <CameraHandler camera={camera} deviceType={deviceType} />
+      {/* <CameraHandler camera={camera} deviceType={deviceType} /> */}
+      <CameraTest camera={camera} deviceType={deviceType} />
       <OptionBox deviceType={deviceType} setDeviceType={setDeviceType} />
     </>
   );

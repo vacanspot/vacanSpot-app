@@ -9,6 +9,7 @@ import {
   poseReferenceState,
   settingPoseState,
 } from '@/recoil/atom/camera';
+import {HeaderHeight} from '@/constants/layout';
 
 interface OptionBoxProps {
   deviceType: 'back' | 'front';
@@ -64,7 +65,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: 44,
     height: '100%',
-    top: 12,
+    top: HeaderHeight + 12,
     right: 12,
     gap: 12,
     justifyContent: 'flex-start',

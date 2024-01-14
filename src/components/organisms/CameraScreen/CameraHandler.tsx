@@ -39,7 +39,13 @@ const CameraHandler = ({
   camera,
   deviceType,
 }: CameraHandlerProps & CameraProps) => {
-  const device = useCameraDevice(deviceType);
+  const device = useCameraDevice(deviceType, {
+    physicalDevices: [
+      'ultra-wide-angle-camera',
+      'wide-angle-camera',
+      'telephoto-camera',
+    ],
+  });
 
   const isFocussed = useIsFocused();
   const isForeground = useIsForeground();

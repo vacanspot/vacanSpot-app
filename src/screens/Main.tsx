@@ -5,6 +5,8 @@ import {CameraScreen, MainBottom} from '@/components/organisms';
 import {Camera} from 'react-native-vision-camera';
 import Header from '@/components/organisms/Header';
 import {BottomHeight, HeaderHeight} from '@/constants/layout';
+import {getStatusBarHeight} from 'react-native-iphone-screen-helper';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 export interface CameraProps {
   camera: React.RefObject<Camera>;
@@ -14,15 +16,19 @@ const Main = () => {
   const camera = useRef<Camera>(null);
 
   return (
-    <View style={styles.Container}>
-      <Header />
-      <View style={styles.CameraArea}>
-        <CameraScreen camera={camera} />
+    <GestureHandlerRootView>
+      <View style={styles.Container}>
+        <View style={styles.Header}>
+          <Header />
+        </View>
+        <View style={styles.CameraArea}>
+          <CameraScreen camera={camera} />
+        </View>
+        <View style={styles.Bottom}>
+          <MainBottom camera={camera} />
+        </View>
       </View>
-      <View style={styles.Bottom}>
-        <MainBottom camera={camera} />
-      </View>
-    </View>
+    </GestureHandlerRootView>
   );
 };
 
@@ -33,14 +39,32 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
   },
+  Header: {
+    width: '100%',
+    height: HeaderHeight,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingTop: getStatusBarHeight(),
+    paddingBottom: 12,
+    paddingHorizontal: 12,
+    backgroundColor: COLORS.white,
+    zIndex: 1,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+  },
   CameraArea: {
     width: '100%',
-    height: Dimensions.get('window').height - HeaderHeight - BottomHeight,
+    height: '100%',
   },
   Bottom: {
     width: '100%',
     height: BottomHeight,
     backgroundColor: COLORS.white,
     zIndex: 1,
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
   },
 });
