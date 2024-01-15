@@ -42,6 +42,7 @@ const CameraHandler = ({
     physicalDevices: ['ultra-wide-angle-camera', 'wide-angle-camera'],
   });
 
+  // 카메라 active inactive 설정
   const isFocussed = useIsFocused();
   const isForeground = useIsForeground();
   const isActive = isFocussed && isForeground;
@@ -52,10 +53,10 @@ const CameraHandler = ({
     {videoResolution: 'max'}, // 동영상 해상도 - 미리보기(화면) 해상도에 영향이 있음
   ]);
 
+  // 화면 확대/축소 기능
   const zoom = useSharedValue(device?.neutralZoom || 1);
   const zoomOffset = useSharedValue(0);
   const animatedProps = useAnimatedProps(() => ({zoom: zoom.value}), [zoom]);
-
   const pinchGesture = Gesture.Pinch()
     .onBegin(() => {
       zoomOffset.value = zoom.value;
@@ -67,6 +68,7 @@ const CameraHandler = ({
       );
     });
 
+  // 포커싱 기능
   const [focusBoxPosition, setFocusBoxPosition] = useState({x: 0, y: 0});
   const focusIconOpacity = useSharedValue(0);
   const animatedStyles = useAnimatedStyle(() => {
@@ -74,7 +76,6 @@ const CameraHandler = ({
       opacity: focusIconOpacity.value,
     };
   });
-
   const focus = useCallback((point: Point) => {
     if (camera.current && point.x && point.y) {
       camera.current.focus(point);
@@ -84,7 +85,6 @@ const CameraHandler = ({
       });
     }
   }, []);
-
   const tapGesture = Gesture.Tap().onEnd(({x, y}) => {
     runOnJS(focus)({x, y});
   });
