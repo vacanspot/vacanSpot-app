@@ -50,21 +50,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     backgroundColor: COLORS.white,
     zIndex: 1,
-    position: 'absolute',
-    top: 0,
-    left: 0,
   },
   CameraArea: {
     width: '100%',
-    height: '100%',
+    height: Dimensions.get('window').height - HeaderHeight - BottomHeight,
   },
   Bottom: {
     width: '100%',
     height: BottomHeight,
     backgroundColor: COLORS.white,
     zIndex: 1,
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
   },
 });

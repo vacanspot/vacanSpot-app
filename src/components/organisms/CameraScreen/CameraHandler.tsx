@@ -1,19 +1,6 @@
-import React, {useEffect} from 'react';
-import {Dimensions, Platform, StyleSheet, View} from 'react-native';
-import {
-  GestureHandlerRootView,
-  PinchGestureHandler,
-  PinchGestureHandlerGestureEvent,
-  TapGestureHandler,
-} from 'react-native-gesture-handler';
-import Reanimated, {
-  Extrapolate,
-  interpolate,
-  useAnimatedGestureHandler,
-  useAnimatedProps,
-  useSharedValue,
-} from 'react-native-reanimated';
-import PoseReference from '@/components/organisms/CameraScreen/PoseReference';
+import React from 'react';
+import {StyleSheet, View} from 'react-native';
+
 import {useIsFocused} from '@react-navigation/core';
 import {useIsForeground} from '@/hook/useIsForeground';
 import {
@@ -23,91 +10,58 @@ import {
 } from 'react-native-vision-camera';
 import {SystemErrorModal} from '@/components/modals';
 import {COLORS} from '@/constants/colors';
+import Reanimated, {
+  useAnimatedProps,
+  useSharedValue,
+} from 'react-native-reanimated';
 import {CameraProps} from '@/screens/Main';
-import {BottomHeight, HeaderHeight} from '@/constants/layout';
+import {Gesture, GestureDetector} from 'react-native-gesture-handler';
+import PoseReference from '@/components/organisms/CameraScreen/PoseReference';
 
 interface CameraHandlerProps {
   deviceType: 'back' | 'front';
 }
 
-const ReanimatedCamera = Reanimated.createAnimatedComponent(Camera);
+const MIN_ZOOM = 0.5;
+const MAX_ZOOM = 6.5;
+
 Reanimated.addWhitelistedNativeProps({
   zoom: true,
 });
+const ReanimatedCamera = Reanimated.createAnimatedComponent(Camera);
 
 const CameraHandler = ({
   camera,
   deviceType,
 }: CameraHandlerProps & CameraProps) => {
   const device = useCameraDevice(deviceType, {
-    physicalDevices: [
-      'ultra-wide-angle-camera',
-      'wide-angle-camera',
-      'telephoto-camera',
-    ],
+    physicalDevices: ['ultra-wide-angle-camera', 'wide-angle-camera'],
   });
 
   const isFocussed = useIsFocused();
   const isForeground = useIsForeground();
   const isActive = isFocussed && isForeground;
 
-  const zoom = useSharedValue(0);
-  const minZoom = device?.minZoom ?? 1;
-  const maxZoom = Math.min(device?.maxZoom ?? 1, 5);
-  const neutralZoom = device?.neutralZoom ?? 1;
+  const zoom = useSharedValue(device?.neutralZoom || 1);
+  const zoomOffset = useSharedValue(0);
+  const gesture = Gesture.Pinch()
+    .onBegin(() => {
+      zoomOffset.value = zoom.value;
+    })
+    .onUpdate(event => {
+      zoom.value = Math.max(
+        MIN_ZOOM,
+        Math.min(zoomOffset.value * event.scale, MAX_ZOOM),
+      );
+    });
 
-  const layoutHeight = HeaderHeight + BottomHeight; // Header, Bottom 영역 높이
-  const SCREEN_HEIGHT = Platform.select<number>({
-    android: Dimensions.get('screen').height - layoutHeight,
-    ios: Dimensions.get('window').height - layoutHeight,
-  }) as number;
-  const SCREEN_WIDTH = Dimensions.get('window').width;
+  const animatedProps = useAnimatedProps(() => ({zoom: zoom.value}), [zoom]);
 
+  // 카메라 해상도 설정
   const format = useCameraFormat(device, [
-    {photoAspectRatio: SCREEN_HEIGHT / SCREEN_WIDTH}, // 카메라 비율
-    {
-      photoResolution: {
-        // 카메라 영역 높이와 너비
-        width: SCREEN_WIDTH,
-        height: SCREEN_HEIGHT,
-      },
-    },
+    {photoResolution: 'max'}, // 사진 해상도
+    {videoResolution: 'max'}, // 동영상 해상도 - 미리보기(화면) 해상도에 영향이 있음
   ]);
-
-  const cameraAnimatedProps = useAnimatedProps(() => {
-    const z = Math.max(Math.min(zoom.value, maxZoom), minZoom);
-    return {
-      zoom: z,
-    };
-  }, [maxZoom, minZoom, zoom]);
-
-  const onPinchGesture = useAnimatedGestureHandler<
-    PinchGestureHandlerGestureEvent,
-    {startZoom?: number}
-  >({
-    onStart: (_, context) => {
-      context.startZoom = zoom.value;
-    },
-    onActive: (event, context) => {
-      const startZoom = context.startZoom ?? 0;
-      const scale = interpolate(
-        event.scale,
-        [1 - 1 / 3, 1, 3],
-        [-1, 0, 1],
-        Extrapolate.CLAMP,
-      );
-      zoom.value = interpolate(
-        scale,
-        [-1, 0, 1],
-        [minZoom, startZoom, maxZoom],
-        Extrapolate.CLAMP,
-      );
-    },
-  });
-
-  useEffect(() => {
-    zoom.value = neutralZoom;
-  }, [neutralZoom, zoom]);
 
   if (!device) {
     return (
@@ -117,26 +71,21 @@ const CameraHandler = ({
     );
   }
   return (
-    <GestureHandlerRootView style={styles.Camera}>
-      <PinchGestureHandler onGestureEvent={onPinchGesture} enabled={isActive}>
-        <Reanimated.View style={StyleSheet.absoluteFill}>
-          <TapGestureHandler numberOfTaps={2}>
-            <ReanimatedCamera
-              ref={camera}
-              style={styles.Camera}
-              device={device}
-              format={format}
-              isActive={isActive}
-              enableZoomGesture={false}
-              animatedProps={cameraAnimatedProps}
-              photo
-              enableHighQualityPhotos
-            />
-          </TapGestureHandler>
-          <PoseReference />
-        </Reanimated.View>
-      </PinchGestureHandler>
-    </GestureHandlerRootView>
+    <>
+      <GestureDetector gesture={gesture}>
+        <ReanimatedCamera
+          ref={camera}
+          style={StyleSheet.absoluteFill}
+          device={device}
+          isActive={isActive}
+          animatedProps={animatedProps}
+          format={format}
+          enableHighQualityPhotos
+          photo
+        />
+      </GestureDetector>
+      <PoseReference />
+    </>
   );
 };
 
@@ -147,9 +96,5 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     backgroundColor: COLORS.black,
-  },
-  Camera: {
-    width: '100%',
-    height: '100%',
   },
 });

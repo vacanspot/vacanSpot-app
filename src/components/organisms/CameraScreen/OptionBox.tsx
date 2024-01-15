@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: 44,
     height: '100%',
-    top: HeaderHeight + 12,
+    top: 12,
     right: 12,
     gap: 12,
     justifyContent: 'flex-start',
