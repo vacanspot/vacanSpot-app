@@ -8,6 +8,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {RecoilRoot} from 'recoil';
 import {RealmProvider} from '@realm/react';
 import ImageSchema from '@/model/ImageSchema';
+import FavoriteSchema from '@/model/FavoriteSchema';
 
 export type ScreenNames = ['Main', 'Pose', 'Favorite', 'Setting'];
 export type RootStackParamList = Record<ScreenNames[number], undefined>;
@@ -33,7 +34,10 @@ const App = () => {
   }
 
   return (
-    <RealmProvider schema={[ImageSchema]} schemaVersion={4} inMemory={true}>
+    <RealmProvider
+      schema={[ImageSchema, FavoriteSchema]}
+      schemaVersion={4}
+      inMemory={true}>
       <RecoilRoot>
         <NavigationContainer>
           <Stack.Navigator>

@@ -10,8 +10,8 @@ import {StackNavigation} from 'App';
 import {useSetRecoilState} from 'recoil';
 import {poseReferenceState} from '@/recoil/atom/camera';
 import {useQuery, useRealm} from '@realm/react';
-import ImageSchema from '@/model/ImageSchema';
 import {Button} from '@/components/atom';
+import FavoriteSchema from '@/model/FavoriteSchema';
 
 interface DefaultPoseProps {
   onlyFavorite?: boolean;
@@ -19,7 +19,7 @@ interface DefaultPoseProps {
 
 const DefaultPose = ({onlyFavorite = false}: DefaultPoseProps) => {
   const realm = useRealm();
-  const favoriteList = useQuery(ImageSchema);
+  const favoriteList = useQuery(FavoriteSchema);
   const navigation = useNavigation<StackNavigation>();
   const setPoseReference = useSetRecoilState(poseReferenceState);
 
@@ -29,7 +29,7 @@ const DefaultPose = ({onlyFavorite = false}: DefaultPoseProps) => {
 
   const registerFavorite = (url: number) => {
     realm.write(() =>
-      realm.create('Image', {
+      realm.create('Favorite', {
         _id: new Realm.BSON.UUID(),
         path: `/assets/pose/${url}`,
       }),

@@ -9,7 +9,6 @@ import {
   poseReferenceState,
   settingPoseState,
 } from '@/recoil/atom/camera';
-import {HeaderHeight} from '@/constants/layout';
 
 interface OptionBoxProps {
   deviceType: 'back' | 'front';

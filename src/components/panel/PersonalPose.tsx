@@ -1,3 +1,4 @@
+import Realm from 'realm';
 import {ImageList} from '@/components/organisms';
 import {COLORS} from '@/constants/colors';
 import ImageSchema from '@/model/ImageSchema';
