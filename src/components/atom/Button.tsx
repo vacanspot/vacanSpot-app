@@ -30,6 +30,7 @@ const styles = {
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: COLORS.main,
+      borderRadius: 4,
     } as ViewStyle,
     CloseButtonText: {
       color: COLORS.white,

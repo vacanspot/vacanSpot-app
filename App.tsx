@@ -1,9 +1,10 @@
+import React, {useMemo, useState} from 'react';
+import 'react-native-get-random-values';
 import {Splash} from '@/components/organisms';
 import {COLORS} from '@/constants/colors';
 import {Favorite, Main, Pose} from '@/screens';
 import {NavigationContainer, NavigationProp} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import React, {useMemo, useState} from 'react';
 import {RecoilRoot} from 'recoil';
 import {RealmProvider} from '@realm/react';
 import ImageSchema from '@/model/ImageSchema';
