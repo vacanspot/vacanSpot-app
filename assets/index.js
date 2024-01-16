@@ -23,9 +23,7 @@ const assets = {
   star: require('./icons/icon-star.png'),
   starOff: require('./icons/icon-star-off.png'),
   pose_recommend: [
-    require('./pose/IMG_0145.png'),
     require('./pose/IMG_0160.png'),
-    require('./pose/IMG_0167.png'),
     require('./pose/IMG_0168.png'),
     require('./pose/IMG_0169.png'),
     require('./pose/IMG_0175.png'),
@@ -43,6 +41,8 @@ const assets = {
     require('./pose/IMG_7593.png'),
     require('./pose/IMG_7599.png'),
     require('./pose/IMG_7600.png'),
+    require('./pose/IMG_1167.png'),
+    require('./pose/IMG_1145.png'),
   ],
 };
 
