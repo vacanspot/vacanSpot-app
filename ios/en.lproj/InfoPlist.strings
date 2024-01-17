@@ -7,4 +7,5 @@
 */
 CFBundleDisplayName = "Vacanspot";
 NSPhotoLibraryUsageDescription = "We need to access to your photo library to save captured images and import photos of your choice to reference for poses.";
-NSCameraUsageDescription = "We need to camera access to take pictures and save to photo library. Pictures only save to your device.";
+NSCameraUsageDescription = "We need to camera access to take pictures. Captured images are stored only on your device.";
+NSPhotoLibraryAddUsageDescription = "We need to access to your photo library to save captured images. Captured images are stored only on your device.";

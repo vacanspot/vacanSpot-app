@@ -1,6 +1,5 @@
-import React, {useCallback, useEffect} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {ReqGrantModal} from '@/components/modals';
-import {useState} from 'react';
 import {
   AppState,
   AppStateStatus,
