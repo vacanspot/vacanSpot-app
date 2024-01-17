@@ -29,14 +29,8 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-	<key>NSCameraUsageDescription</key>
-	<string>camera library permission</string>
 	<key>NSAllowArbitraryLoads</key>
 	<true/>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>photo library permission</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>photo library permission</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>SpoqaHanSansNeo-Bold.ttf</string>
