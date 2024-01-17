@@ -1,0 +1,10 @@
+/* 
+  infoPlist.strings
+  vacanSpot
+
+  Created by Jihye Kim on 2024/01/17.
+  
+*/
+CFBundleDisplayName="Vacanspot";
+NSPhotoLibraryUsageDescription="We need to access to your photo library to save captured images and import photos of your choice to reference for poses.";
+NSCameraUsageDescription = "We need to camera access to take pictures.";
