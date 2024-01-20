@@ -6,9 +6,6 @@ import {Favorite, Main, Pose} from '@/screens';
 import {NavigationContainer, NavigationProp} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {RecoilRoot} from 'recoil';
-import {RealmProvider} from '@realm/react';
-import ImageSchema from '@/model/ImageSchema';
-import FavoriteSchema from '@/model/FavoriteSchema';
 
 export type ScreenNames = ['Main', 'Pose', 'Favorite', 'Setting'];
 export type RootStackParamList = Record<ScreenNames[number], undefined>;
@@ -34,34 +31,29 @@ const App = () => {
   }
 
   return (
-    <RealmProvider
-      schema={[ImageSchema, FavoriteSchema]}
-      schemaVersion={4}
-      inMemory={true}>
-      <RecoilRoot>
-        <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen
-              name="Main"
-              component={Main}
-              options={{
-                headerShown: false,
-              }}
-            />
-            <Stack.Screen
-              name="Pose"
-              component={Pose}
-              options={{...HeaderDefaultOption, headerTitle: '포즈'}}
-            />
-            <Stack.Screen
-              name="Favorite"
-              component={Favorite}
-              options={{...HeaderDefaultOption, headerTitle: 'MY'}}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </RecoilRoot>
-    </RealmProvider>
+    <RecoilRoot>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Main"
+            component={Main}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="Pose"
+            component={Pose}
+            options={{...HeaderDefaultOption, headerTitle: '포즈'}}
+          />
+          <Stack.Screen
+            name="Favorite"
+            component={Favorite}
+            options={{...HeaderDefaultOption, headerTitle: 'MY'}}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </RecoilRoot>
   );
 };
 
