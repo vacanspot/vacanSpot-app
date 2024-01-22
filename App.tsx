@@ -1,11 +1,11 @@
 import React, {useMemo, useState} from 'react';
 import 'react-native-get-random-values';
+import {RecoilRoot} from 'recoil';
 import {Splash} from '@/components/organisms';
 import {COLORS} from '@/constants/colors';
 import {Favorite, Main, Pose} from '@/screens';
 import {NavigationContainer, NavigationProp} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {RecoilRoot} from 'recoil';
 
 export type ScreenNames = ['Main', 'Pose', 'Favorite', 'Setting'];
 export type RootStackParamList = Record<ScreenNames[number], undefined>;
