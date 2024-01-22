@@ -1,8 +1,7 @@
-import React from 'react';
-import {PrimaryIcon} from '@/components/atom';
 import {StyleSheet, Text, View} from 'react-native';
-import Assets from 'assets';
+import {PrimaryIcon} from '@/components/atom';
 import {COLORS} from '@/constants/colors';
+import Assets from 'assets';
 
 const Header = () => {
   return (

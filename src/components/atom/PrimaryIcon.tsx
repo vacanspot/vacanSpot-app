@@ -1,5 +1,3 @@
-import {COLORS} from '@/constants/colors';
-import React from 'react';
 import {
   Image,
   ImageSourcePropType,
@@ -8,6 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import {COLORS} from '@/constants/colors';
 
 interface PrimaryIconProps {
   onPress?: () => void;

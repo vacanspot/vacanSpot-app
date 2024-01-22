@@ -17,6 +17,7 @@
     "@react-navigation/material-top-tabs": "^6.6.5",
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "^6.9.17",
+    "eslint-plugin-import": "^2.29.1",
     "lottie-ios": "^4.3.3",
     "lottie-react-native": "^6.4.0",
     "react": "18.2.0",

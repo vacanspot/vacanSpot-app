@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {DefaultPose} from '@/components/panel';
 
 const Favorite = () => {

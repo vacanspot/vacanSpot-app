@@ -1,7 +1,6 @@
+import {StyleSheet, View, FlatList} from 'react-native';
 import {ImageItem} from '@/components/molecules';
 import {ImageItemProps} from '@/components/molecules/ImageItem';
-import React from 'react';
-import {StyleSheet, View, FlatList} from 'react-native';
 
 interface ImageListProps {
   data?: Array<

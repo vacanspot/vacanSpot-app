@@ -1,14 +1,12 @@
-import React from 'react';
-
-import {TransparentIcon} from '@/components/atom';
 import {StyleSheet, View} from 'react-native';
-import Assets from 'assets';
 import {useRecoilState} from 'recoil';
+import {TransparentIcon} from '@/components/atom';
 import {
   cameraFlashState,
   poseReferenceState,
   settingPoseState,
 } from '@/recoil/atom/camera';
+import Assets from 'assets';
 
 interface OptionBoxProps {
   deviceType: 'back' | 'front';

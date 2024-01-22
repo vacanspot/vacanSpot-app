@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Dimensions,
   Image,
@@ -7,8 +6,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import Assets from 'assets';
 import {COLORS} from '@/constants/colors';
+import Assets from 'assets';
 
 export interface ImageItemProps {
   image: ImageSourcePropType;

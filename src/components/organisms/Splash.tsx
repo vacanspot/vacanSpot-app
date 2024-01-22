@@ -1,8 +1,7 @@
+import {StyleSheet, View} from 'react-native';
+import LottieView from 'lottie-react-native';
 import {COLORS} from '@/constants/colors';
 import Assets from 'assets';
-import LottieView from 'lottie-react-native';
-import React from 'react';
-import {StyleSheet, View} from 'react-native';
 
 interface SplashProps {
   setLoaded: React.Dispatch<React.SetStateAction<boolean>>;

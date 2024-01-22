@@ -1,14 +1,13 @@
-import React, {useMemo} from 'react';
-import {useEffect, useState} from 'react';
+import React, {useMemo, useEffect, useState} from 'react';
 import {Animated, StyleSheet, View} from 'react-native';
 import {useCameraPermission} from 'react-native-vision-camera';
-import {COLORS} from '@/constants/colors';
-import {ReqGrantModal} from '@/components/modals';
 import {useRecoilState} from 'recoil';
+import {ReqGrantModal} from '@/components/modals';
+import {COLORS} from '@/constants/colors';
 import {takePhotoState} from '@/recoil/atom/camera';
-import OptionBox from './OptionBox';
-import CameraHandler from './CameraHandler';
 import {CameraProps} from '@/screens/Main';
+import CameraHandler from './CameraHandler';
+import OptionBox from './OptionBox';
 
 const CameraScreen = ({camera}: CameraProps) => {
   const {hasPermission, requestPermission} = useCameraPermission();

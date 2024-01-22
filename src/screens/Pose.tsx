@@ -1,7 +1,6 @@
 import {DefaultPose, PersonalPose} from '@/components/panel';
 import {COLORS} from '@/constants/colors';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import React from 'react';
 
 const Tab = createMaterialTopTabNavigator();
 

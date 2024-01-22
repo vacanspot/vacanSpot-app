@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {v4 as uuid} from 'uuid';
-import {COLORS} from '@/constants/colors';
-import Assets from 'assets';
-import {ImageList} from '@/components/organisms';
-import {StackActions, useNavigation} from '@react-navigation/core';
 import {StackNavigation} from 'App';
 import {useSetRecoilState} from 'recoil';
-import {poseReferenceState} from '@/recoil/atom/camera';
+import {v4 as uuid} from 'uuid';
 import {Button} from '@/components/atom';
+import {ImageList} from '@/components/organisms';
+import {COLORS} from '@/constants/colors';
+import {poseReferenceState} from '@/recoil/atom/camera';
 import {useAsyncStorage} from '@react-native-async-storage/async-storage';
+import {StackActions, useNavigation} from '@react-navigation/core';
+import Assets from 'assets';
 
 interface DefaultPoseProps {
   onlyFavorite?: boolean;

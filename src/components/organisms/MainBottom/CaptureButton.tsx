@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import {COLORS} from '@/constants/colors';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Camera} from 'react-native-vision-camera';
-import {CameraRoll} from '@react-native-camera-roll/camera-roll';
-import {ReqGrantModal} from '@/components/modals';
 import {useRecoilValue, useSetRecoilState} from 'recoil';
+import {ReqGrantModal} from '@/components/modals';
+import {COLORS} from '@/constants/colors';
 import {cameraFlashState, takePhotoState} from '@/recoil/atom/camera';
+import {CameraRoll} from '@react-native-camera-roll/camera-roll';
 
 interface CaptureButtonProps {
   camera: React.RefObject<Camera>;

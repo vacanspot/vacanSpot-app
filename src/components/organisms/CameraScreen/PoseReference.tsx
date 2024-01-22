@@ -1,7 +1,6 @@
-import React from 'react';
-import {poseReferenceState, settingPoseValueState} from '@/recoil/atom/camera';
 import {Image, StyleSheet, View} from 'react-native';
 import {useRecoilValue} from 'recoil';
+import {poseReferenceState, settingPoseValueState} from '@/recoil/atom/camera';
 
 const PoseReference = () => {
   const poseReference = useRecoilValue(poseReferenceState);

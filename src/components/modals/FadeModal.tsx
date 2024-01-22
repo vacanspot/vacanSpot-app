@@ -1,6 +1,5 @@
-import {COLORS} from '@/constants/colors';
-import React from 'react';
 import {Modal, StyleSheet, View} from 'react-native';
+import {COLORS} from '@/constants/colors';
 
 interface FadeModalProps {
   visible: boolean;

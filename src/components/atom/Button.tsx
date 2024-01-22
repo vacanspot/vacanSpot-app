@@ -1,7 +1,5 @@
-import React from 'react';
+import {TouchableOpacity, ViewStyle, Text} from 'react-native';
 import {COLORS} from '@/constants/colors';
-import {TouchableOpacity, ViewStyle} from 'react-native';
-import {Text} from 'react-native';
 
 interface ButtonProps {
   children: JSX.Element;

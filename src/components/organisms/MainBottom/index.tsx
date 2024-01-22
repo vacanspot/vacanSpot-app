@@ -1,13 +1,12 @@
-import React from 'react';
 import {StyleSheet, View} from 'react-native';
+import {Camera} from 'react-native-vision-camera';
+import {StackNavigation} from 'App';
+import {PrimaryIcon} from '@/components/atom';
+import {useNavigation} from '@react-navigation/native';
+import Assets from 'assets';
 import CaptureButton from './CaptureButton';
 import PhotosButton from './PhotosButton';
 import PoseSetting from './PoseSetting';
-import {Camera} from 'react-native-vision-camera';
-import {useNavigation} from '@react-navigation/native';
-import {StackNavigation} from 'App';
-import Assets from 'assets';
-import {PrimaryIcon} from '@/components/atom';
 
 interface MainBottomProps {
   camera: React.RefObject<Camera>;

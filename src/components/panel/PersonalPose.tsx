@@ -1,11 +1,3 @@
-import {v4 as uuid} from 'uuid';
-import {ImageList} from '@/components/organisms';
-import {COLORS} from '@/constants/colors';
-import {poseReferenceState} from '@/recoil/atom/camera';
-import {useAsyncStorage} from '@react-native-async-storage/async-storage';
-import {useNavigation} from '@react-navigation/core';
-import {StackNavigation} from 'App';
-import Assets from 'assets';
 import React, {useEffect, useState} from 'react';
 import {
   Dimensions,
@@ -15,7 +7,15 @@ import {
   View,
 } from 'react-native';
 import {launchImageLibrary} from 'react-native-image-picker';
+import {StackNavigation} from 'App';
 import {useSetRecoilState} from 'recoil';
+import {v4 as uuid} from 'uuid';
+import {ImageList} from '@/components/organisms';
+import {COLORS} from '@/constants/colors';
+import {poseReferenceState} from '@/recoil/atom/camera';
+import {useAsyncStorage} from '@react-native-async-storage/async-storage';
+import {useNavigation} from '@react-navigation/core';
+import Assets from 'assets';
 
 const PersonalPose = () => {
   const navigation = useNavigation<StackNavigation>();

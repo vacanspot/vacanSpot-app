@@ -1,5 +1,4 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {ReqGrantModal} from '@/components/modals';
 import {
   AppState,
   AppStateStatus,
@@ -10,15 +9,16 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import {useRecoilValue} from 'recoil';
+import {PrimaryIcon} from '@/components/atom';
+import {ReqGrantModal} from '@/components/modals';
 import {COLORS} from '@/constants/colors';
+import {takePhotoState} from '@/recoil/atom/camera';
 import {
   CameraRoll,
   PhotoIdentifiersPage,
 } from '@react-native-camera-roll/camera-roll';
-import {PrimaryIcon} from '@/components/atom';
 import Assets from 'assets';
-import {useRecoilValue} from 'recoil';
-import {takePhotoState} from '@/recoil/atom/camera';
 
 const PhotosButton = () => {
   const isTakenPhoto = useRecoilValue(takePhotoState);

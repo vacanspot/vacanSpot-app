@@ -1,14 +1,12 @@
-import React, {useState} from 'react';
-
-import {COLORS} from '@/constants/colors';
-import {Slider} from '@react-native-assets/slider';
+import React, {useState, useEffect, useRef} from 'react';
 import {Animated, StyleSheet, View} from 'react-native';
 import {useRecoilState, useRecoilValue} from 'recoil';
-import {settingPoseState, settingPoseValueState} from '@/recoil/atom/camera';
-import {useEffect, useRef} from 'react';
-import Assets from 'assets';
 import {PrimaryIcon} from '@/components/atom';
+import {COLORS} from '@/constants/colors';
 import {BottomHeight} from '@/constants/layout';
+import {settingPoseState, settingPoseValueState} from '@/recoil/atom/camera';
+import {Slider} from '@react-native-assets/slider';
+import Assets from 'assets';
 
 const settingValue = {
   height: {

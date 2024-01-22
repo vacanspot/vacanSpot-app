@@ -1,15 +1,6 @@
 import React, {useCallback, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {useIsFocused} from '@react-navigation/core';
-import {useIsForeground} from '@/hook/useIsForeground';
-import {
-  Camera,
-  Point,
-  useCameraDevice,
-  useCameraFormat,
-} from 'react-native-vision-camera';
-import {SystemErrorModal} from '@/components/modals';
-import {COLORS} from '@/constants/colors';
+import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import Reanimated, {
   runOnJS,
   useAnimatedProps,
@@ -18,9 +9,19 @@ import Reanimated, {
   withDelay,
   withTiming,
 } from 'react-native-reanimated';
-import {CameraProps} from '@/screens/Main';
-import {Gesture, GestureDetector} from 'react-native-gesture-handler';
+import {
+  Camera,
+  Point,
+  useCameraDevice,
+  useCameraFormat,
+} from 'react-native-vision-camera';
+
+import {SystemErrorModal} from '@/components/modals';
 import PoseReference from '@/components/organisms/CameraScreen/PoseReference';
+import {COLORS} from '@/constants/colors';
+import {useIsForeground} from '@/hook/useIsForeground';
+import {CameraProps} from '@/screens/Main';
+import {useIsFocused} from '@react-navigation/core';
 
 interface CameraHandlerProps {
   deviceType: 'back' | 'front';

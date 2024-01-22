@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
 import {Button} from '@/components/atom';
 import {FadeModal} from '@/components/modals';
-import {StyleSheet, Text, View} from 'react-native';
 
 interface SystemErrorModalProps {
   text: string;

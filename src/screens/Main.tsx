@@ -1,12 +1,12 @@
 import React, {useRef} from 'react';
-import {COLORS} from '@/constants/colors';
 import {Dimensions, StyleSheet, View} from 'react-native';
-import {CameraScreen, MainBottom} from '@/components/organisms';
-import {Camera} from 'react-native-vision-camera';
-import Header from '@/components/organisms/Header';
-import {BottomHeight, HeaderHeight} from '@/constants/layout';
-import {getStatusBarHeight} from 'react-native-iphone-screen-helper';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {getStatusBarHeight} from 'react-native-iphone-screen-helper';
+import {Camera} from 'react-native-vision-camera';
+import {CameraScreen, MainBottom} from '@/components/organisms';
+import Header from '@/components/organisms/Header';
+import {COLORS} from '@/constants/colors';
+import {BottomHeight, HeaderHeight} from '@/constants/layout';
 
 export interface CameraProps {
   camera: React.RefObject<Camera>;

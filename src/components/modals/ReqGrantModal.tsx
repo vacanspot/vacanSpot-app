@@ -1,7 +1,6 @@
+import {Linking, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {FadeModal} from '@/components/modals';
 import {COLORS} from '@/constants/colors';
-import React from 'react';
-import {Linking, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 interface ReqGrantModalProps {
   text: string;
