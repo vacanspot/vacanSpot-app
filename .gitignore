@@ -21,7 +21,7 @@ DerivedData
 *.ipa
 *.xcuserstate
 ios/.xcode.env.local
-ios/vacanSpot/AppCenter-Config.plist
+ios/config
 
 # Android/IntelliJ
 #

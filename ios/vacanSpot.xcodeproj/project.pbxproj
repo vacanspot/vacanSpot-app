@@ -43,6 +43,8 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = vacanSpot/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-vacanSpot-vacanSpotTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-vacanSpot-vacanSpotTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E88F6872B60EFEF008F4198 /* AppCenter-Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "AppCenter-Config.plist"; path = "vacanSpot/AppCenter-Config.plist"; sourceTree = "<group>"; };
+		2E88F68F2B6273C4008F4198 /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
+		2E88F6912B6278A4008F4198 /* release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
 		2EE7BB142B576CA200C4ECB6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = ios/en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2EE7BB162B576CC500C4ECB6 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ios/ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-vacanSpot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vacanSpot.debug.xcconfig"; path = "Target Support Files/Pods-vacanSpot/Pods-vacanSpot.debug.xcconfig"; sourceTree = "<group>"; };
@@ -118,6 +120,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		2E88F6902B6273CB008F4198 /* config */ = {
+			isa = PBXGroup;
+			children = (
+				2E88F68F2B6273C4008F4198 /* debug.xcconfig */,
+				2E88F6912B6278A4008F4198 /* release.xcconfig */,
+			);
+			path = config;
+			sourceTree = "<group>";
+		};
 		4E5433F3420D447EB14EEA1E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -138,6 +149,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				2E88F6902B6273CB008F4198 /* config */,
 				2EE7BB152B576CA200C4ECB6 /* InfoPlist.strings */,
 				13B07FAE1A68108700A75B9A /* vacanSpot */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -524,7 +536,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-vacanSpot.debug.xcconfig */;
+			baseConfigurationReference = 2E88F68F2B6273C4008F4198 /* debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -559,7 +571,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-vacanSpot.release.xcconfig */;
+			baseConfigurationReference = 2E88F6912B6278A4008F4198 /* release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
