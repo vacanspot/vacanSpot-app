@@ -31,8 +31,10 @@
 
 <br />
 
-<img src="https://github.com/wanna-transfer/vacanSpot-app/assets/67260437/5a29137d-52db-436c-92f9-64befdd45962" width="400" height="300">
-
+<div style="text-align: center">
+<img src="https://github.com/wanna-transfer/vacanSpot-app/assets/67260437/5a29137d-52db-436c-92f9-64befdd45962" width="600" height="450">
+</div>
+ 
 <br />
 
 ## 사용 기술
